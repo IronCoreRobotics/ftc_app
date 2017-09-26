@@ -7,51 +7,67 @@ package org.firstinspires.ftc.teamcode;
 public class MotorControl
 
 {
-    private double speed;
-    private boolean LB;
-    private boolean RB;
-    public double publicOutsideSourceSettingSpeed;
+    private double Speed;
+    private boolean FirstButton;
+    private boolean SecondButton;
+    private double ControlledSpeed;
+    private int FirstDivisionOfSpeed;
+    private int SecondDivisionOfSpeed;
 
-    public MotorControl(double speed, boolean LB, boolean RB) {
-        this.speed = speed;
-        this.LB = LB;
-        this.RB = RB;
-    }
+    public MotorControl(double Speed, boolean FirstButton, boolean SecondButton, int FirstDivisionOfSpeed, int SecondDivisionOfSpeed)
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
-    public void setPublicOutsideSourceSettingSpeed(double publicOutsideSourceSettingSpeed) {
-        this.publicOutsideSourceSettingSpeed = publicOutsideSourceSettingSpeed;
-    }
-
-    public double getPublicOutsideSourceSettingSpeed() {
-        return publicOutsideSourceSettingSpeed;
-    }
-
-    public double ControlMotorSpeed()
     {
-        if(this.LB == false && this.RB == false)
-        {
-            setPublicOutsideSourceSettingSpeed(1);
-            setSpeed(this.speed);
-        }
-
-        if(this.LB == true && this.RB == false)
-        {
-            setPublicOutsideSourceSettingSpeed(2);
-            setSpeed(this.speed/2);
-        }
-
-        if(this.LB == true && this.RB == true)
-        {
-            setPublicOutsideSourceSettingSpeed(10);
-            setSpeed(this.speed/10);
-        }
-
-        return this.speed;
+        this.Speed = Speed;
+        this.SecondButton = SecondButton;
+        this.FirstButton = FirstButton;
+        this.FirstDivisionOfSpeed = FirstDivisionOfSpeed;
+        this.SecondDivisionOfSpeed = SecondDivisionOfSpeed;
     }
 
+    public double getControlledSpeed()
 
+    {
+        return ControlMotorSpeed();
+    }
+
+    private void setControlledSpeed(double ControlledSpeed)
+
+    {
+        this.ControlledSpeed = ControlledSpeed;
+    }
+
+    private int getFirstDivisionOfSpeed()
+
+    {
+        return FirstDivisionOfSpeed;
+    }
+
+    private int getSecondDivisionOfSpeed()
+
+    {
+        return SecondDivisionOfSpeed;
+    }
+
+    private double ControlMotorSpeed()
+    {
+        if(this.FirstButton == false && this.SecondButton == false)
+
+        {
+            setControlledSpeed(this.Speed);
+        }
+
+        if(this.FirstButton == true && this.SecondButton == false)
+
+        {
+            setControlledSpeed(this.Speed/getFirstDivisionOfSpeed());
+        }
+
+        if(this.FirstButton == true && this.SecondButton == true)
+
+        {
+            setControlledSpeed(this.Speed/getSecondDivisionOfSpeed());
+        }
+
+        return this.ControlledSpeed;
+    }
 }

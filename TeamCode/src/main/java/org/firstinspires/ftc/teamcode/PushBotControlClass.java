@@ -35,67 +35,48 @@ public class PushBotControlClass extends OpMode
     public void loop()
 
     {
-       MotorControl ControlMotor1 = new MotorControl(1.00, gamepad1.left_bumper, gamepad1.right_bumper);
-        MotorControl ControlMotor2 = new MotorControl(-1.00, gamepad1.left_bumper, gamepad1.right_bumper);
-        MotorControl ControlMotor3 = new MotorControl(1.00, gamepad1.left_bumper,gamepad1.right_bumper);
+        MotorControl ControlMotor1 = new MotorControl(1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
+        MotorControl ControlMotor2 = new MotorControl(-1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
+        MotorControl ControlMotor3 = new MotorControl(1.00, gamepad1.left_bumper,gamepad1.right_bumper, 2, 10);
 
         if(gamepad1.left_stick_x == 1)
+
         {
-            motor1.setPower(ControlMotor1.ControlMotorSpeed());
-            motor2.setPower(-ControlMotor2.ControlMotorSpeed());
+            motor1.setPower(ControlMotor1.getControlledSpeed());
+            motor2.setPower(-ControlMotor2.getControlledSpeed());
             motor3.setPower(0);
-            telemetry.addLine("Turn right" + motor2.getPower());
+            telemetry.addLine("Turning Right");
         }
 
         else if(gamepad1.left_stick_x == -1)
+
         {
-            motor1.setPower(-ControlMotor1.ControlMotorSpeed());
-            motor2.setPower(ControlMotor2.ControlMotorSpeed());
+            motor1.setPower(-ControlMotor1.getControlledSpeed());
+            motor2.setPower(ControlMotor2.getControlledSpeed());
             motor3.setPower(0);
-            telemetry.addLine("Turn left" + motor2.getPower());
+            telemetry.addLine("Turning Left");
         }
 
-        else if(gamepad1.dpad_up == true)
+        else if(gamepad1.dpad_up)
+
         {
-            motor3.setPower(ControlMotor3.ControlMotorSpeed());
-            telemetry.addLine("Arm go up" + motor2.getPower());
+            motor3.setPower(ControlMotor3.getControlledSpeed());
+            telemetry.addLine("Arm Going Up");
         }
 
-        else if(gamepad1.dpad_down == true)
+        else if(gamepad1.dpad_down)
+
         {
-            motor3.setPower(-ControlMotor3.ControlMotorSpeed());
-            telemetry.addLine("Arm go down" + motor2.getPower());
+            motor3.setPower(-ControlMotor3.getControlledSpeed());
+            telemetry.addLine("Arm Going Down");
         }
 
         else
+
         {
-            motor1.setPower(gamepad1.right_stick_y*ControlMotor1.ControlMotorSpeed());
-            motor2.setPower(gamepad1.right_stick_y*ControlMotor2.ControlMotorSpeed());
+            motor1.setPower(gamepad1.right_stick_y*ControlMotor1.getControlledSpeed());
+            motor2.setPower(gamepad1.right_stick_y*ControlMotor2.getControlledSpeed());
             motor3.setPower(0);
-            telemetry.addLine("Movement given to the Y " + motor2.getPower() + ControlMotor1.getPublicOutsideSourceSettingSpeed());
         }
     }
-
-    private void turnRight() {
-        motor3.setPower(0);
-        if (gamepad1.left_bumper && gamepad1.right_bumper) {
-            telemetry.addLine("Turn Right Slow");
-            motor2.setPower(.10);
-            motor1.setPower(.10);
-        } else if (gamepad1.left_bumper) {
-            telemetry.addLine("Turn Right Medium");
-            motor2.setPower(.50);
-            motor1.setPower(.50);
-        } else {
-            telemetry.addLine("Turn Right Turbo");
-            motor2.setPower(1.00);
-            motor1.setPower(1.00);
-        }
-
-    }
-
-        private void turnLeft() {
-
-        }
-
 }
