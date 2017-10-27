@@ -30,7 +30,7 @@ public class GripSetter extends OpMode {
         servo2.setPosition(gamepad1.right_trigger);
 
         telemetry.addData("servo1: ", gamepad1.left_trigger);
-        telemetry.addData("servo2: ", gamepad1.right_bumper);
+        telemetry.addData("servo2: ", gamepad1.right_trigger);
 
     }
 }
