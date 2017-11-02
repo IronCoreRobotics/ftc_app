@@ -73,8 +73,8 @@ Changes with verion 3.3 include:
  * Blocks
     - Update to latest Google Blockly release.
     - Sample op modes can be selected as a template when creating new op mode.
-    - Fixed bug where the blocks would disappear temporarily when mouse button is held down.
-    - Added blocks for Range.clip and Range.scale.
+    - Fixed bug where the com.google.blocks would disappear temporarily when mouse button is held down.
+    - Added com.google.blocks for Range.clip and Range.scale.
     - User can now disable/enable Block op modes.
     - Fix to prevent occasional Blocks deadlock.
  * OnBot Java
@@ -112,7 +112,7 @@ Changes with version 3.2 include:
 * Blocks Programming Development Tool:
     - Changed "LynxI2cColorRangeSensor" block to "REV Color/range sensor" block.
     - Fixed tooltip for ColorSensor.isLightOn block.
-    Added blocks for ColorSensor.getNormalizedColors and LynxI2cColorRangeSensor.getNormalizedColors.
+    Added com.google.blocks for ColorSensor.getNormalizedColors and LynxI2cColorRangeSensor.getNormalizedColors.
 
 * Added example op modes for digital touch sensor and REV Robotics Color Distance sensor.
 * User selectable color themes.
@@ -138,8 +138,8 @@ Also note that in version 3.10 software, the setMaxSpeed and getMaxSpeed methods
 
 Changes include:
  * Blocks changes
-    - Added VuforiaTrackableDefaultListener.getPose and Vuforia.trackPose blocks.
-    - Added optimized blocks support for Vuforia extended tracking.
+    - Added VuforiaTrackableDefaultListener.getPose and Vuforia.trackPose com.google.blocks.
+    - Added optimized com.google.blocks support for Vuforia extended tracking.
     - Added atan2 block to the math category.
     - Added useCompetitionFieldTargetLocations parameter to Vuforia.initialize block.  If set to false, the target locations are placed at (0,0,0) with target orientation as specified in https://github.com/gearsincorg/FTCVuforiaDemo/blob/master/Robot_Navigation.java tutorial op mode.
  * Incorporates additional improvements to USB comm layer to improve system resiliency (to recover from a greater number of communication disruptions).
@@ -176,9 +176,9 @@ Changes include:
  * Fixes telemetry log addition race.
  * Publishes all the sources (not just a select few).
  * Includes Block programming improvements
-    - Addition of optimized Vuforia blocks.
+    - Addition of optimized Vuforia com.google.blocks.
     - Auto scrollbar to projects and sounds pages.
-    - Fixed blocks paste bug.
+    - Fixed com.google.blocks paste bug.
     - Blocks execute after while-opModeIsActive loop (to allow for cleanup before exiting op mode).
     - Added gyro integratedZValue block.
     - Fixes bug with projects page for Firefox browser.
@@ -217,78 +217,78 @@ Version 2.6 (released on 16.12.16)
 
 Version 2.5 (internal release on released on 16.12.13)
   * Blocks Programming mode changes:
-     - Added blocks support for AdafruitBNO055IMU.
+     - Added com.google.blocks support for AdafruitBNO055IMU.
      - Added Download Op Mode button to FtcBocks.html.
-     - Added support for copying blocks in one OpMode and pasting them in an other OpMode. The clipboard content is stored on the phone, so the programming mode server must be running.
+     - Added support for copying com.google.blocks in one OpMode and pasting them in an other OpMode. The clipboard content is stored on the phone, so the programming mode server must be running.
      - Modified Utilities section of the toolbox.
      - In Programming Mode, display information about the active connections.
      - Fixed paste location when workspace has been scrolled.
-     - Added blocks support for the android Accelerometer.
+     - Added com.google.blocks support for the android Accelerometer.
      - Fixed issue where Blocks Upload Op Mode truncated name at first dot.
-     - Added blocks support for Android SoundPool.
-     - Added type safety to blocks for Acceleration.
-     - Added type safety to blocks for AdafruitBNO055IMU.Parameters.
-     - Added type safety to blocks for AnalogInput.
-     - Added type safety to blocks for AngularVelocity.
-     - Added type safety to blocks for Color.
-     - Added type safety to blocks for ColorSensor.
-     - Added type safety to blocks for CompassSensor.
-     - Added type safety to blocks for CRServo.
-     - Added type safety to blocks for DigitalChannel.
-     - Added type safety to blocks for ElapsedTime.
-     - Added type safety to blocks for Gamepad.
-     - Added type safety to blocks for GyroSensor.
-     - Added type safety to blocks for IrSeekerSensor.
-     - Added type safety to blocks for LED.
-     - Added type safety to blocks for LightSensor.
-     - Added type safety to blocks for LinearOpMode.
-     - Added type safety to blocks for MagneticFlux.
-     - Added type safety to blocks for MatrixF.     
-     - Added type safety to blocks for MrI2cCompassSensor.
-     - Added type safety to blocks for MrI2cRangeSensor.
-     - Added type safety to blocks for OpticalDistanceSensor.
-     - Added type safety to blocks for Orientation.
-     - Added type safety to blocks for Position.
-     - Added type safety to blocks for Quaternion.
-     - Added type safety to blocks for Servo.
-     - Added type safety to blocks for ServoController.
-     - Added type safety to blocks for Telemetry.
-     - Added type safety to blocks for Temperature.
-     - Added type safety to blocks for TouchSensor.
-     - Added type safety to blocks for UltrasonicSensor.
-     - Added type safety to blocks for VectorF.
-     - Added type safety to blocks for Velocity.
-     - Added type safety to blocks for VoltageSensor.
-     - Added type safety to blocks for VuforiaLocalizer.Parameters.
-     - Added type safety to blocks for VuforiaTrackable.
-     - Added type safety to blocks for VuforiaTrackables.
-     - Added type safety to blocks for enums in AdafruitBNO055IMU.Parameters.
-     - Added type safety to blocks for AndroidAccelerometer, AndroidGyroscope, AndroidOrientation, and AndroidTextToSpeech.
+     - Added com.google.blocks support for Android SoundPool.
+     - Added type safety to com.google.blocks for Acceleration.
+     - Added type safety to com.google.blocks for AdafruitBNO055IMU.Parameters.
+     - Added type safety to com.google.blocks for AnalogInput.
+     - Added type safety to com.google.blocks for AngularVelocity.
+     - Added type safety to com.google.blocks for Color.
+     - Added type safety to com.google.blocks for ColorSensor.
+     - Added type safety to com.google.blocks for CompassSensor.
+     - Added type safety to com.google.blocks for CRServo.
+     - Added type safety to com.google.blocks for DigitalChannel.
+     - Added type safety to com.google.blocks for ElapsedTime.
+     - Added type safety to com.google.blocks for Gamepad.
+     - Added type safety to com.google.blocks for GyroSensor.
+     - Added type safety to com.google.blocks for IrSeekerSensor.
+     - Added type safety to com.google.blocks for LED.
+     - Added type safety to com.google.blocks for LightSensor.
+     - Added type safety to com.google.blocks for LinearOpMode.
+     - Added type safety to com.google.blocks for MagneticFlux.
+     - Added type safety to com.google.blocks for MatrixF.
+     - Added type safety to com.google.blocks for MrI2cCompassSensor.
+     - Added type safety to com.google.blocks for MrI2cRangeSensor.
+     - Added type safety to com.google.blocks for OpticalDistanceSensor.
+     - Added type safety to com.google.blocks for Orientation.
+     - Added type safety to com.google.blocks for Position.
+     - Added type safety to com.google.blocks for Quaternion.
+     - Added type safety to com.google.blocks for Servo.
+     - Added type safety to com.google.blocks for ServoController.
+     - Added type safety to com.google.blocks for Telemetry.
+     - Added type safety to com.google.blocks for Temperature.
+     - Added type safety to com.google.blocks for TouchSensor.
+     - Added type safety to com.google.blocks for UltrasonicSensor.
+     - Added type safety to com.google.blocks for VectorF.
+     - Added type safety to com.google.blocks for Velocity.
+     - Added type safety to com.google.blocks for VoltageSensor.
+     - Added type safety to com.google.blocks for VuforiaLocalizer.Parameters.
+     - Added type safety to com.google.blocks for VuforiaTrackable.
+     - Added type safety to com.google.blocks for VuforiaTrackables.
+     - Added type safety to com.google.blocks for enums in AdafruitBNO055IMU.Parameters.
+     - Added type safety to com.google.blocks for AndroidAccelerometer, AndroidGyroscope, AndroidOrientation, and AndroidTextToSpeech.
 
 **************************************************************************************
 
 Version 2.4 (released on 16.11.13)
   * Fix to avoid crashing for nonexistent resources.
   * Blocks Programming mode changes:
-     - Added blocks to support OpenGLMatrix, MatrixF, and VectorF.
-     - Added blocks to support AngleUnit, AxesOrder, AxesReference, CameraDirection, CameraMonitorFeedback, DistanceUnit, and TempUnit.
-     - Added blocks to support Acceleration.
-     - Added blocks to support LinearOpMode.getRuntime.
-     - Added blocks to support MagneticFlux and Position.
+     - Added com.google.blocks to support OpenGLMatrix, MatrixF, and VectorF.
+     - Added com.google.blocks to support AngleUnit, AxesOrder, AxesReference, CameraDirection, CameraMonitorFeedback, DistanceUnit, and TempUnit.
+     - Added com.google.blocks to support Acceleration.
+     - Added com.google.blocks to support LinearOpMode.getRuntime.
+     - Added com.google.blocks to support MagneticFlux and Position.
      - Fixed typos.
-     - Made blocks for ElapsedTime more consistent with other objects.
-     - Added blocks to support Quaternion, Velocity, Orientation, AngularVelocity.
-     - Added blocks to support VuforiaTrackables, VuforiaTrackable, VuforiaLocalizer, VuforiaTrackableDefaultListener.
-     - Fixed a few blocks.
-     - Added type checking to new blocks.
+     - Made com.google.blocks for ElapsedTime more consistent with other objects.
+     - Added com.google.blocks to support Quaternion, Velocity, Orientation, AngularVelocity.
+     - Added com.google.blocks to support VuforiaTrackables, VuforiaTrackable, VuforiaLocalizer, VuforiaTrackableDefaultListener.
+     - Fixed a few com.google.blocks.
+     - Added type checking to new com.google.blocks.
      - Updated to latest blockly.
-     - Added default variable blocks to navigation and matrix blocks.
+     - Added default variable com.google.blocks to navigation and matrix com.google.blocks.
      - Fixed toolbox entry for openGLMatrix_rotation_withAxesArgs.
      - When user downloads Blocks-generated op mode, only the .blk file is downloaded.
      - When user uploads Blocks-generated op mode (.blk file), Javascript code is auto generated.
      - Added DbgLog support.
-     - Added logging when a blocks file is read/written.
-     - Fixed bug to properly render blocks even if missing devices from configuration file.
+     - Added logging when a com.google.blocks file is read/written.
+     - Fixed bug to properly render com.google.blocks even if missing devices from configuration file.
      - Added support for additional characters (not just alphanumeric) for the block file names (for download and upload).
      - Added support for OpMode flavor (“Autonomous” or “TeleOp”) and group.
   * Changes to Samples to prevent tutorial issues.
@@ -303,14 +303,14 @@ Version 2.4 (released on 16.11.13)
 **************************************************************************************
 
 Version 2.35 (released on 16.10.06)
-  * Blockly programming mode - Removed unnecesary idle() call from blocks for new project.
+  * Blockly programming mode - Removed unnecesary idle() call from com.google.blocks for new project.
 
 **************************************************************************************
 
 Version 2.30 (released on 16.10.05)
   * Blockly programming mode:
      - Mechanism added to save Blockly op modes from Programming Mode Server onto local device
-     - To avoid clutter, blocks are displayed in categorized folders
+     - To avoid clutter, com.google.blocks are displayed in categorized folders
      - Added support for DigitalChannel
      - Added support for ModernRoboticsI2cCompassSensor
      - Added support for ModernRoboticsI2cRangeSensor
@@ -357,7 +357,7 @@ Version 2.10 (released on 16.09.03)
  * Blockly enhancements
     - support for android.graphics.Color.
     - added support for ElapsedTime.
-    - improved look and legibility of blocks.
+    - improved look and legibility of com.google.blocks.
     - support for compass sensor.
     - support for ultrasonic sensor.
     - support for IrSeeker.
@@ -410,7 +410,7 @@ Release 16.07.08
 
 Release 16.03.30
 
- * For the MIT App Inventor, the design blocks have new icons that better represent the function of each design component.
+ * For the MIT App Inventor, the design com.google.blocks have new icons that better represent the function of each design component.
  * Some changes were made to the shutdown logic to ensure the robust shutdown of some of our USB services.
  * A change was made to LinearOpMode so as to allow a given instance to be executed more than once, which is required for the App Inventor.
  * Javadoc improved/updated.

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">blocks</string>
+    <string name="not_available">not available</string>
+    <string name="network_not_ok">network problem</string>
+    <string name="server_ok">server ok</string>
+    <string name="server_not_ok">server problem</string>
+</resources>
