@@ -1,0 +1,11 @@
+Android NDK: OpenCV: You should ignore warning about 'non-system libraries in linker flags' and 'opencv_java' library.    
+Android NDK:         'OPENCV_INSTALL_MODULES:=on' can be used to build APK with included OpenCV binaries    
+rm -f /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi/*
+rm -f /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi/gdbserver
+rm -f /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi/gdb.setup
+mkdir -p /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi
+echo [armeabi] "Gdbserver      ": "[arm-linux-androideabi] /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi/gdbserver"
+install -p /Users/nathantofte/Library/Android/sdk/ndk-bundle/prebuilt/android-arm/gdbserver/gdbserver /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi/gdbserver
+echo [armeabi] "Gdbsetup       ": "/Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi/gdb.setup"
+echo "set solib-search-path /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/obj/local/armeabi" > /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi/gdb.setup
+echo "directory /Users/nathantofte/Library/Android/sdk/ndk-bundle/sysroot /Users/nathantofte/Library/Android/sdk/ndk-bundle/sources/cxx-stl/system" >> /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/armeabi/gdb.setup

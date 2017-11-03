@@ -1,0 +1,10 @@
+{
+  "buildFiles": [
+    "/Users/nathantofte/IronCore/ftc_app/openCVLibrary331/src/main/jniLibs/OpenCV.mk"
+  ],
+  "cleanCommands": [],
+  "libraries": {},
+  "toolchains": {},
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}

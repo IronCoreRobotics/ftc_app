@@ -1,0 +1,11 @@
+Android NDK: OpenCV: You should ignore warning about 'non-system libraries in linker flags' and 'opencv_java' library.    
+Android NDK:         'OPENCV_INSTALL_MODULES:=on' can be used to build APK with included OpenCV binaries    
+rm -f /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips/*
+rm -f /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips/gdbserver
+rm -f /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips/gdb.setup
+mkdir -p /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips
+echo [mips] "Gdbserver      ": "[mips64el-linux-android] /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips/gdbserver"
+install -p /Users/nathantofte/Library/Android/sdk/ndk-bundle/prebuilt/android-mips/gdbserver/gdbserver /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips/gdbserver
+echo [mips] "Gdbsetup       ": "/Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips/gdb.setup"
+echo "set solib-search-path /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/obj/local/mips" > /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips/gdb.setup
+echo "directory /Users/nathantofte/Library/Android/sdk/ndk-bundle/sysroot /Users/nathantofte/Library/Android/sdk/ndk-bundle/sources/cxx-stl/system" >> /Users/nathantofte/IronCore/ftc_app/openCVLibrary331/build/intermediates/ndkBuild/debug/lib/mips/gdb.setup
