@@ -20,20 +20,20 @@ public class Gripper extends OpMode {
         servo1 = hardwareMap.servo.get("Servo1");
         servo2 = hardwareMap.servo.get("Servo2");
 
-        servo1.setPosition(0.2);
-        servo2.setPosition(0.0);
+        servo1.setPosition(0.4);
+        servo2.setPosition(0.75);
     }
 
     @Override
     public void loop() {
 
         if(gamepad1.right_bumper){
-            servo1.setPosition(0.1);
-            servo2.setPosition(0.1);
+            servo1.setPosition(0.65);
+            servo2.setPosition(0.9);
         }
         else{
-            servo1.setPosition(0.2);
-            servo2.setPosition(0.0);
+            servo1.setPosition(0.4);
+            servo2.setPosition(0.75);
         }
 
 //        telemetry.addData("servo1: ", gamepad1.left_trigger);
