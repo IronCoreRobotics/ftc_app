@@ -1,14 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.ConceptCompassCalibration;
-import org.firstinspires.ftc.robotcontroller.external.samples.SensorColor;
-import org.firstinspires.ftc.robotcontroller.external.samples.SensorREVColorDistance;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 /**
  * Created by Fam on 9/9/2017.
@@ -22,7 +18,8 @@ public class PushBotControlClass extends OpMode
     DcMotor motor1;
     DcMotor motor2;
     DcMotor motor3;
-
+    ColorSensor sensorColor;
+    DistanceSensor sensorDistance;
 
     public void init()
 
@@ -30,6 +27,8 @@ public class PushBotControlClass extends OpMode
         motor1 = hardwareMap.dcMotor.get("Rightside_Motor");
         motor2 = hardwareMap.dcMotor.get("Leftside_Motor");
         motor3 = hardwareMap.dcMotor.get("Arm_Motor");
+        sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
+        sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_color_distance");
     }
 
     public void loop()

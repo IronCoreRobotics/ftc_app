@@ -14,6 +14,12 @@ public class MotorControl
     private int FirstDivisionOfSpeed;
     private int SecondDivisionOfSpeed;
 
+    public MotorControl(double speed)
+
+    {
+        Speed = speed;
+    }
+
     public MotorControl(double Speed, boolean FirstButton, boolean SecondButton, int FirstDivisionOfSpeed, int SecondDivisionOfSpeed)
 
     {
