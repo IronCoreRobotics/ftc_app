@@ -60,6 +60,7 @@ import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -334,7 +335,11 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
                 blueDetector.process(opencvMatImage);
                 List<MatOfPoint> contours = blueDetector.getContours();
                 Log.e(TAG, "Contours count: " + contours.size());
-//               Imgproc.boundingRect(opencvMatImage);
+                if (!contours.isEmpty()) {
+                    Rect bounds = Imgproc.boundingRect(contours.get(0));
+                    Log.d(this.getClass().getSimpleName(),"Rect info: "+ bounds.x +" "+bounds.y);
+                }
+
             }
 
 
