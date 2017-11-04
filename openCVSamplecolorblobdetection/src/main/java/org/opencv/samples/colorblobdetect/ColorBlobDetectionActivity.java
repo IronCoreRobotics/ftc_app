@@ -157,6 +157,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.i(TAG, "Touched rgba color: (" + mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +
                 ", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3] + ")");
 
+        Log.i(TAG, "Touched hsva color: (" + mBlobColorHsv.val[0] + ", " + mBlobColorHsv.val[1] +
+                ", " + mBlobColorHsv.val[2] + ", " + mBlobColorHsv.val[3] + ")");
+
         mDetector.setHsvColor(mBlobColorHsv);
 
         Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE);

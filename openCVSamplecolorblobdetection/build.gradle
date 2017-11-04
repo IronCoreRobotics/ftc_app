@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.opencv.samples.colorblobdetect"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 126
     }
 

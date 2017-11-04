@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.opencv.samples.tutorial1"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 26
     }
 
