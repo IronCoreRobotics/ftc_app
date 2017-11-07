@@ -28,8 +28,14 @@
  */
 package org.firstinspires.ftc.teamcode;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -109,7 +115,8 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
 
 
     Scalar CONTOUR_COLOR = null;
-
+    int cameraMonitorViewId=-1;
+    ImageView processedVideoImageView=null;
 
 
 
@@ -208,16 +215,39 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
          * To start up Vuforia, tell it the view that we wish to use for camera monitor (on the RC phone);
          * If no camera monitor is desired, use the parameterless constructor instead (commented out below).
          */
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
-
-
-
-
-
         // OR...  Do Not Activate the Camera Monitor View, to save power
-        // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+       // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+
+
+        // get a reference to the RelativeLayout so we can change the background
+        // color of the Robot Controller app to match the hue detected by the RGB sensor.
+        int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+        final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+
+
+        relativeLayout.post(new Runnable() {
+            public void run() {
+                processedVideoImageView = new ImageView(hardwareMap.appContext);
+                processedVideoImageView.setBackgroundColor(Color.RED);
+
+                //  int resID = hardwareMap.appContext.getResources().getIdentifier("tim.jpg","drawable", null);
+                //imageView.setImageResource(R.drawable.tim);
+
+                RelativeLayout layout = (RelativeLayout)relativeLayout;
+                FrameLayout frameLayout = (FrameLayout) layout.getParent().getParent();
+                frameLayout.addView(processedVideoImageView);
+            }
+        });
+
+
+
+
+
+
+
 
         /*
          * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
@@ -310,14 +340,7 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
 
             telemetry.update();
 
-
-
-
-            Image rgbImage = getImage();
-
-            findBalls(rgbImage);
-
-
+            processImage();
 
         }
     }
@@ -345,12 +368,28 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
 
 
 
+               // Imgproc.cvtColor(mat, Imgproc.COLOR_BGR2RGBA)
+
+
+                final Bitmap processedBitmap = Bitmap.createBitmap(rgbImage.getWidth(), rgbImage.getHeight(), Bitmap.Config.RGB_565);
+                Utils.matToBitmap(opencvMatImage, processedBitmap);
+                processedVideoImageView.post(new Runnable() {
+                    public void run() {
+                        processedVideoImageView.setImageBitmap(processedBitmap);
+                    }
+                });
+
+
+
+
+
                 // find contours with biggest number of points inside.
                 for (int i=0;i<contours.size();i++){
                     Log.e(TAG, String.format("Contour %d has %d points inside",i,contours.get(i).rows()));
                     Rect bounds = Imgproc.boundingRect(contours.get(i));
                     Log.d(TAG,String.format("Bounding box: x=%d, y=%d, width=%d, height=%d",bounds.x,bounds.y,bounds.width,bounds.height));
                 }
+
 
 
             }
@@ -364,20 +403,20 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
     }
 
 
-    public Image getImage() {
+    public void processImage() {
         try (MyCloseableFrame frame = new MyCloseableFrame(vuforia.getFrameQueue().take())) {
             long numImages = frame.getNumImages();
             for (int i = 0; i < numImages; i++) {
                 final Image img = frame.getImage(i);
                 int fmt = img.getFormat();
                 if (fmt == PIXEL_FORMAT.RGB565) {
-                    return img;
+                    findBalls(img);
                 }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+
     }
 
     class MyCloseableFrame extends VuforiaLocalizer.CloseableFrame implements AutoCloseable {
