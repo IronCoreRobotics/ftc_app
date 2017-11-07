@@ -1,9 +1,8 @@
-package com.ironcore.gls;
+package com.ironcorerobotics.gls;
 
+import com.ironcorerobotics.gls.GripController;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by shawneverly on 11/4/17.
@@ -24,7 +23,7 @@ public class LiftGripSystemTestRunner extends OpMode {
 
     @Override
     public void loop() {
-        gripController.control(gamepad2);
-        liftController.control(gamepad2);
+        gripController.control(gamepad1);
+        liftController.control(gamepad1);
     }
 }

@@ -1,4 +1,4 @@
-package com.ironcore.gls;
+package com.ironcorerobotics.gls;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -21,13 +21,13 @@ public class GripController {
         leftGrip.setPosition(0.7);
     }
 
-    public void control(Gamepad gamepad2) {
+    public void control(Gamepad gamepad) {
 
-        if(gamepad2.left_bumper){
+        if(gamepad.left_bumper){
             rightGrip.setPosition(0.43);
             leftGrip.setPosition(0.83);
         }
-        else if(gamepad2.right_bumper){
+        else if(gamepad.right_bumper){
             rightGrip.setPosition(0.35);
             leftGrip.setPosition(0.95);
         }

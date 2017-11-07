@@ -1,4 +1,4 @@
-package com.ironcore.gls;
+package com.ironcorerobotics.gls;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -18,6 +18,9 @@ public class LiftController {
         loc = 0;
     }
 
-    public void control(Gamepad gamepad2) {
+    public void control(Gamepad gamepad) {
+        lift.setPower(gamepad.left_stick_y);
+        loc = lift.getCurrentPosition();
+//        telemetry.addData("motor: ", loc);
     }
 }
