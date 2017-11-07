@@ -108,7 +108,7 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
     private ColorBlobDetector    redDetector = null;
 
 
-
+    Scalar CONTOUR_COLOR = null;
 
 
 
@@ -134,6 +134,8 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
         // set color for red and blue detectors
         blueHolorHsv = new Scalar(158.015625, 144.859375, 87.109375, 0.0);     //(h,s,v,a);
         redHolorHsv = new Scalar(255);     //(h,s,v,a);
+
+        CONTOUR_COLOR = new Scalar(255, 0, 0, 255);     //(h,s,v,a);
 
 
         blueDetector.setHsvColor(blueHolorHsv);
@@ -312,6 +314,7 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
 
 
             Image rgbImage = getImage();
+
             findBalls(rgbImage);
 
 
@@ -334,14 +337,23 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
 
                 blueDetector.process(opencvMatImage);
                 List<MatOfPoint> contours = blueDetector.getContours();
+                Imgproc.drawContours(opencvMatImage, contours, -1, CONTOUR_COLOR);
                 Log.e(TAG, "Contours count: " + contours.size());
-                if (!contours.isEmpty()) {
-                    Rect bounds = Imgproc.boundingRect(contours.get(0));
-                    Log.d(this.getClass().getSimpleName(),"Rect info: "+ bounds.x +" "+bounds.y);
+
+                Mat colorLabel = opencvMatImage.submat(4, 68, 4, 68);
+                colorLabel.setTo(CONTOUR_COLOR);
+
+
+
+                // find contours with biggest number of points inside.
+                for (int i=0;i<contours.size();i++){
+                    Log.e(TAG, String.format("Contour %d has %d points inside",i,contours.get(i).rows()));
+                    Rect bounds = Imgproc.boundingRect(contours.get(i));
+                    Log.d(TAG,String.format("Bounding box: x=%d, y=%d, width=%d, height=%d",bounds.x,bounds.y,bounds.width,bounds.height));
                 }
 
-            }
 
+            }
 
         }
     }
