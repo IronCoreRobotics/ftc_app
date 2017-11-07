@@ -355,7 +355,7 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
                 bitmap.copyPixelsFromBuffer(rgbImage.getPixels());
 
                 //put the image into a MAT for OpenCV
-                Mat opencvMatImage = new Mat(rgbImage.getWidth(), rgbImage.getHeight(), CvType.CV_8UC4);
+                Mat opencvMatImage = new Mat(rgbImage.getHeight(), rgbImage.getWidth(), CvType.CV_8UC4);
                 Utils.bitmapToMat(bitmap, opencvMatImage);
 
                 blueDetector.process(opencvMatImage);
