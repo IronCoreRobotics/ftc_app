@@ -10,17 +10,23 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class LiftController {
 
-    long loc;
+    long currentPosition;
+    long startPosition;
     DcMotor lift;
 
     public LiftController(HardwareMap hardwareMap) {
         lift = hardwareMap.dcMotor.get("LiftMotor");
-        loc = 0;
+        startPosition = lift.getCurrentPosition();
+        currentPosition = lift.getCurrentPosition();
     }
 
     public void control(Gamepad gamepad) {
+
+        if (gamepad.b) {
+
+        }
         lift.setPower(gamepad.left_stick_y);
-        loc = lift.getCurrentPosition();
+        currentPosition = lift.getCurrentPosition();
 //        telemetry.addData("motor: ", loc);
     }
 }
