@@ -1,19 +1,41 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by tmwat on 10/30/2017.
  */
 
-public class DrawBridge extends OpMode {
-    @Override
-    public void init() {
+@Autonomous(name = "Drawbridge_Winch", group = "Test")
 
-    }
+public class DrawBridge extends LinearOpMode
+
+{
+
+    Servo servo1;
 
     @Override
-    public void loop() {
+    public void runOpMode() throws InterruptedException
+
+    {
+
+        servo1 = hardwareMap.servo.get("drawbridge_winch");
+
+
+        servo1.setPosition(0);
+
+        sleep(800);
+
+        servo1.setPosition(0.5);
+
+        sleep(3000);
+
+        servo1.setPosition(1.00);
+
+        sleep(800);
+
 
     }
 }

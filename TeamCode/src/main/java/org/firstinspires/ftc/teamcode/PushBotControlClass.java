@@ -20,6 +20,7 @@ public class PushBotControlClass extends OpMode
     DcMotor motor3;
     ColorSensor sensorColor;
     DistanceSensor sensorDistance;
+    MotorControl controlMotor1;
 
     public void init()
 
@@ -29,19 +30,20 @@ public class PushBotControlClass extends OpMode
         motor3 = hardwareMap.dcMotor.get("Arm_Motor");
         sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
         sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_color_distance");
+        controlMotor1 = new MotorControl(1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
     }
 
     public void loop()
 
     {
-        MotorControl ControlMotor1 = new MotorControl(1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
+
         MotorControl ControlMotor2 = new MotorControl(-1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
         MotorControl ControlMotor3 = new MotorControl(1.00, gamepad1.left_bumper,gamepad1.right_bumper, 2, 10);
 
         if(gamepad1.left_stick_x == 1)
 
         {
-            motor1.setPower(ControlMotor1.getControlledSpeed());
+            motor1.setPower(controlMotor1.getControlledSpeed());
             motor2.setPower(-ControlMotor2.getControlledSpeed());
             motor3.setPower(0);
             telemetry.addLine("Turning Right");
@@ -50,7 +52,7 @@ public class PushBotControlClass extends OpMode
         else if(gamepad1.left_stick_x == -1)
 
         {
-            motor1.setPower(-ControlMotor1.getControlledSpeed());
+            motor1.setPower(-controlMotor1.getControlledSpeed());
             motor2.setPower(ControlMotor2.getControlledSpeed());
             motor3.setPower(0);
             telemetry.addLine("Turning Left");
@@ -73,7 +75,7 @@ public class PushBotControlClass extends OpMode
         else
 
         {
-            motor1.setPower(gamepad1.right_stick_y*ControlMotor1.getControlledSpeed());
+            motor1.setPower(gamepad1.right_stick_y*controlMotor1.getControlledSpeed());
             motor2.setPower(gamepad1.right_stick_y*ControlMotor2.getControlledSpeed());
             motor3.setPower(0);
         }

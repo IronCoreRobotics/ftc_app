@@ -14,11 +14,7 @@ public class MotorControl
     private int FirstDivisionOfSpeed;
     private int SecondDivisionOfSpeed;
 
-    public MotorControl(double speed)
 
-    {
-        Speed = speed;
-    }
 
     public MotorControl(double Speed, boolean FirstButton, boolean SecondButton, int FirstDivisionOfSpeed, int SecondDivisionOfSpeed)
 
@@ -28,6 +24,12 @@ public class MotorControl
         this.FirstButton = FirstButton;
         this.FirstDivisionOfSpeed = FirstDivisionOfSpeed;
         this.SecondDivisionOfSpeed = SecondDivisionOfSpeed;
+    }
+
+    public MotorControl(double speed)
+
+    {
+        Speed = speed;
     }
 
     public double getControlledSpeed()
@@ -59,7 +61,7 @@ public class MotorControl
         if(this.FirstButton == false && this.SecondButton == false)
 
         {
-            setControlledSpeed(this.Speed);
+            setControlledSpeed(this.Speed/getSecondDivisionOfSpeed());
         }
 
         if(this.FirstButton == true && this.SecondButton == false)
@@ -71,7 +73,7 @@ public class MotorControl
         if(this.FirstButton == true && this.SecondButton == true)
 
         {
-            setControlledSpeed(this.Speed/getSecondDivisionOfSpeed());
+            setControlledSpeed(this.Speed);
         }
 
         return this.ControlledSpeed;
