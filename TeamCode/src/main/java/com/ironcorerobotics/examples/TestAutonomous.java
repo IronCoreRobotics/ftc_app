@@ -1,6 +1,7 @@
 package com.ironcorerobotics.examples;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -8,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 /**
  * Created by shawneverly on 8/19/17.
  */
-@Autonomous(name = "TestAutonomous")
-
+//@Autonomous(name = "TestAutonomous")
+@Disabled
 public class TestAutonomous extends LinearOpMode{
 
     DcMotor leftSide;
