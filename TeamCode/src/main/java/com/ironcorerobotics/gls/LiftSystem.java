@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created by Fam on 11/4/2017.
  */
-@TeleOp(name = "LiftSystem")
+@TeleOp(name = "LiftSystem1")
 public class LiftSystem extends OpMode{
 
     int zeroPoint;
@@ -21,6 +21,10 @@ public class LiftSystem extends OpMode{
 
     @Override
     public void init() {
+        initGLS();
+    }
+
+    private void initGLS() {
         rightGrip = hardwareMap.servo.get("right_grip");
         leftGrip = hardwareMap.servo.get("left_grip");
 
@@ -62,9 +66,9 @@ public class LiftSystem extends OpMode{
 
     private void controlLift(Gamepad gamepad) {
         if (gamepad.b && !lift.isBusy()) {
-            lift.setTargetPosition(2700 + zeroPoint);
+            lift.setTargetPosition(3240 + zeroPoint);
         } else if (gamepad.y && !lift.isBusy()) {
-            lift.setTargetPosition(5400 + zeroPoint);
+            lift.setTargetPosition(6480 + zeroPoint);
         } else if (gamepad.a && !lift.isBusy()) {
             lift.setTargetPosition(zeroPoint);
         }
