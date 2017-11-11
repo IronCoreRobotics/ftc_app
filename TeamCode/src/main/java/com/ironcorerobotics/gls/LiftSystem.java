@@ -13,7 +13,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class LiftSystem extends OpMode{
 
     int zeroPoint;
+    int gripperPosition;
 
+    boolean wasPressed;
 
     Servo rightGrip;
     Servo leftGrip;
@@ -36,6 +38,9 @@ public class LiftSystem extends OpMode{
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         zeroPoint = lift.getCurrentPosition();
         lift.setPower(1);
+
+        gripperPosition = 1;
+        wasPressed = false;
     }
 
     @Override
@@ -50,15 +55,39 @@ public class LiftSystem extends OpMode{
     }
 
     private void controlGrip(Gamepad gamepad) {
-        if(gamepad.left_bumper) {
+        if(gamepad.right_bumper){
+            if(!wasPressed){
+                wasPressed = true;
+                gripperPosition += 1;
+            }
+        }
+        else if(gamepad.left_bumper){
+            if(!wasPressed){
+                wasPressed = true;
+                gripperPosition -= 1;
+            }
+        }
+        else{
+            wasPressed = false;
+        }
+
+        if(gripperPosition < 1){
+            gripperPosition = 1;
+        }
+        else if(gripperPosition > 3){
+            gripperPosition = 3;
+        }
+
+
+        if(gripperPosition == 2) {        //Slightly open
             rightGrip.setPosition(0.43);
             leftGrip.setPosition(0.83);
         }
-        else if(gamepad.right_bumper){
+        else if(gripperPosition == 3){    //Closed
             rightGrip.setPosition(0.35);
             leftGrip.setPosition(0.95);
         }
-        else{
+        else if(gripperPosition == 1){    //Open
             rightGrip.setPosition(0.51);
             leftGrip.setPosition(0.7);
         }
