@@ -15,17 +15,17 @@ public class LiftSystem extends OpMode{
     int zeroPoint;
 
 
-    Servo servo1;
-    Servo servo2;
+    Servo rightGrip;
+    Servo leftGrip;
     DcMotor lift;
 
     @Override
     public void init() {
-        servo1 = hardwareMap.servo.get("Servo1");
-        servo2 = hardwareMap.servo.get("Servo2");
+        rightGrip = hardwareMap.servo.get("right_grip");
+        leftGrip = hardwareMap.servo.get("left_grip");
 
-        servo1.setPosition(0.51);
-        servo2.setPosition(0.7);
+        rightGrip.setPosition(0.51);
+        leftGrip.setPosition(0.7);
 
         lift = hardwareMap.dcMotor.get("LiftMotor");
 
@@ -47,16 +47,16 @@ public class LiftSystem extends OpMode{
 
     private void controlGrip(Gamepad gamepad) {
         if(gamepad.left_bumper) {
-            servo1.setPosition(0.43);
-            servo2.setPosition(0.83);
+            rightGrip.setPosition(0.43);
+            leftGrip.setPosition(0.83);
         }
         else if(gamepad.right_bumper){
-            servo1.setPosition(0.35);
-            servo2.setPosition(0.95);
+            rightGrip.setPosition(0.35);
+            leftGrip.setPosition(0.95);
         }
         else{
-            servo1.setPosition(0.51);
-            servo2.setPosition(0.7);
+            rightGrip.setPosition(0.51);
+            leftGrip.setPosition(0.7);
         }
     }
 
