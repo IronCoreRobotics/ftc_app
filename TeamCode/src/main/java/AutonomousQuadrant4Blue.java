@@ -20,7 +20,8 @@ public class AutonomousQuadrant4Blue extends LinearOpMode
     ColorSensor sensorColor;
     DistanceSensor sensorDistance;
 
-    @Override public void runOpMode()throws InterruptedException
+    @Override
+    public void runOpMode() throws InterruptedException
 
     {
         motor1 = hardwareMap.dcMotor.get("rightside_Motor");
@@ -31,43 +32,95 @@ public class AutonomousQuadrant4Blue extends LinearOpMode
 
         waitForStart();
 
+        JewelScoreAutonomous("Blue");
+    }
+
+    public void JewelScoreAutonomous(String AllianceColor)
+
+    {
+
         servo1.setPosition(0);
 
         sleep(1000);
 
-        if (sensorColor.red() > sensorColor.blue()&& opModeIsActive()) {
-            motor2.setPower(-.30); //backwards
+        if (AllianceColor == "Blue")
 
-            sleep(350);
+        {
 
-            motor2.setPower(0);
+            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
+                motor2.setPower(-.30); //backwards
 
-            servo1.setPosition(.7);
+                sleep(350);
 
-            sleep(1000);
+                motor2.setPower(0);
 
-            motor2.setPower(.30); //forwards
+                servo1.setPosition(.7);
 
-            sleep(250);
+                sleep(1000);
+
+                motor2.setPower(.30);
+
+                sleep(250);
 
 
+            }
+
+            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
+                motor1.setPower(.30);
+
+                sleep(350);
+
+                motor1.setPower(0);
+                motor2.setPower(0);
+
+                servo1.setPosition(.7);
+
+                sleep(1000);
+
+                motor1.setPower(-.30);
+
+                sleep(250);
+            }
         }
 
-        if (sensorColor.red() < sensorColor.blue()&& opModeIsActive()) {
-            motor1.setPower(.30);//forwards
+        if (AllianceColor == "Red")
 
-            sleep(350);
+        {
 
-            motor1.setPower(0);
-            motor2.setPower(0);
+            if (sensorColor.red() > sensorColor.blue()&& opModeIsActive()) {
+                motor2.setPower(.30);
 
-            servo1.setPosition(.7);
+                sleep(350);
 
-            sleep(1000);
+                motor2.setPower(0);
 
-            motor1.setPower(-.30);
+                servo1.setPosition(.7);
 
-            sleep(250);
+                sleep(1000);
+
+                motor2.setPower(-.30);
+
+                sleep(250);
+
+
+            }
+
+            if (sensorColor.red() < sensorColor.blue()&& opModeIsActive()) {
+                motor1.setPower(-.30);
+
+                sleep(350);
+
+                motor1.setPower(0);
+                motor2.setPower(0);
+
+                servo1.setPosition(.7);
+
+                sleep(1000);
+
+                motor1.setPower(.30);
+
+                sleep(250);
+            }
         }
 
         motor1.setPower(0);

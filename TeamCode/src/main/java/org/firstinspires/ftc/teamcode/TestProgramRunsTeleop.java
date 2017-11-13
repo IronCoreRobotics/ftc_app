@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
@@ -17,12 +18,16 @@ import com.qualcomm.robotcore.hardware.Servo;
     public class TestProgramRunsTeleop extends OpMode
 
 {
-    long loc;
 
+    int zeroPoint;
+    int gripperPosition;
+
+    boolean wasPressed;
+
+
+    Servo rightGrip;
+    Servo leftGrip;
     DcMotor lift;
-
-    Servo servo1;
-    Servo servo2;
 
     DcMotor motor1;
     DcMotor motor2;
@@ -32,13 +37,7 @@ import com.qualcomm.robotcore.hardware.Servo;
         public void init()
 
         {
-            lift = hardwareMap.dcMotor.get("G_S_L");
-            loc = 0;
-            servo1 = hardwareMap.servo.get("right_Arm");
-            servo2 = hardwareMap.servo.get("left_Arm");
-
-            servo1.setPosition(0.51);
-            servo2.setPosition(0.7);
+            initGLS();
             motor1 = hardwareMap.dcMotor.get("rightside_Motor");
             motor2 = hardwareMap.dcMotor.get("leftside_Motor");
         }
@@ -46,26 +45,9 @@ import com.qualcomm.robotcore.hardware.Servo;
         public void loop()
 
         {
-            lift.setPower(gamepad2.left_stick_y);
-            loc = lift.getCurrentPosition();
-
-            if(gamepad2.left_trigger > .50){
-                servo1.setPosition(0.43);
-                servo2.setPosition(0.83);
-                drive();
-            }
-            else if(gamepad2.right_trigger > .50){
-                servo1.setPosition(0.35);
-                servo2.setPosition(0.95);
-                drive();
-            }
-            else{
-                servo1.setPosition(0.51);
-                servo2.setPosition(0.7);
-                drive();
-            }
-
-
+            drive();
+            controlLift(gamepad2);
+            controlGrip(gamepad2);
         }
 
     public void drive()
@@ -79,6 +61,7 @@ import com.qualcomm.robotcore.hardware.Servo;
             motor1.setPower(ControlMotor1.getControlledSpeed());
             motor2.setPower(-ControlMotor2.getControlledSpeed());
         }
+
 
         else if(gamepad1.left_stick_x == -1)
 
@@ -104,6 +87,68 @@ import com.qualcomm.robotcore.hardware.Servo;
             motor2.setPower(0);
         }
     }
+    private void initGLS() {
+        rightGrip = hardwareMap.servo.get("right_grip");
+        leftGrip = hardwareMap.servo.get("left_grip");
 
+        rightGrip.setPosition(0.51);
+        leftGrip.setPosition(0.7);
+
+        lift = hardwareMap.dcMotor.get("LiftMotor");
+
+        lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        zeroPoint = lift.getCurrentPosition();
+        lift.setPower(1);
+    }
+
+
+    private void controlGrip(Gamepad gamepad) {
+        if(gamepad.right_bumper){
+            if(!wasPressed){
+                wasPressed = true;
+                gripperPosition += 1;
+            }
+        }
+        else if(gamepad.left_bumper){
+            if(!wasPressed){
+                wasPressed = true;
+                gripperPosition -= 1;
+            }
+        }
+        else{
+            wasPressed = false;
+        }
+
+        if(gripperPosition < 1){
+            gripperPosition = 1;
+        }
+        else if(gripperPosition > 3){
+            gripperPosition = 3;
+        }
+
+
+        if(gripperPosition == 2) {        //Slightly open
+            rightGrip.setPosition(0.43);
+            leftGrip.setPosition(0.83);
+        }
+        else if(gripperPosition == 3){    //Closed
+            rightGrip.setPosition(0.35);
+            leftGrip.setPosition(0.95);
+        }
+        else if(gripperPosition == 1){    //Open
+            rightGrip.setPosition(0.51);
+            leftGrip.setPosition(0.7);
+        }
+    }
+
+    private void controlLift(Gamepad gamepad) {
+        if (gamepad.b && !lift.isBusy()) {
+            lift.setTargetPosition(3240 + zeroPoint);
+        } else if (gamepad.y && !lift.isBusy()) {
+            lift.setTargetPosition(6480 + zeroPoint);
+        } else if (gamepad.a && !lift.isBusy()) {
+            lift.setTargetPosition(zeroPoint);
+        }
+    }
 
 }
