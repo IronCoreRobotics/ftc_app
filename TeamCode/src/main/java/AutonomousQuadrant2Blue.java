@@ -33,11 +33,22 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
 
             waitForStart();
 
-            servo1.setPosition(0);
+            JewelScoreAutonomous("Blue");
+        }
 
-            sleep(1000);
+    public void JewelScoreAutonomous(String AllianceColor)
 
-            if (sensorColor.red() > sensorColor.blue()&& opModeIsActive()) {
+    {
+
+        servo1.setPosition(0);
+
+        sleep(1000);
+
+        if (AllianceColor == "Blue")
+
+        {
+
+            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
                 motor2.setPower(-.30); //backwards
 
                 sleep(350);
@@ -48,15 +59,15 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
 
                 sleep(1000);
 
-                motor2.setPower(.30); //forwards
+                motor2.setPower(.30);
 
                 sleep(250);
 
 
             }
 
-            if (sensorColor.red() < sensorColor.blue()&& opModeIsActive()) {
-                motor1.setPower(.30);//forwards
+            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
+                motor1.setPower(.30);
 
                 sleep(350);
 
@@ -71,10 +82,51 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
 
                 sleep(250);
             }
-
-            motor1.setPower(0);
-            motor2.setPower(0);
-
-            sleep(1000);
         }
+
+        if (AllianceColor == "Red")
+
+        {
+
+            if (sensorColor.red() > sensorColor.blue()&& opModeIsActive()) {
+                motor2.setPower(.30);
+
+                sleep(350);
+
+                motor2.setPower(0);
+
+                servo1.setPosition(.7);
+
+                sleep(1000);
+
+                motor2.setPower(-.30);
+
+                sleep(250);
+
+
+            }
+
+            if (sensorColor.red() < sensorColor.blue()&& opModeIsActive()) {
+                motor1.setPower(-.30);
+
+                sleep(350);
+
+                motor1.setPower(0);
+                motor2.setPower(0);
+
+                servo1.setPosition(.7);
+
+                sleep(1000);
+
+                motor1.setPower(.30);
+
+                sleep(250);
+            }
+        }
+
+        motor1.setPower(0);
+        motor2.setPower(0);
+
+        sleep(1000);
+    }
 }
