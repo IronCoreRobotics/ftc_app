@@ -29,6 +29,11 @@ public class ColorBlobDetector {
     Mat mDilatedMask = new Mat();
     Mat mHierarchy = new Mat();
 
+
+    public void setColorRadius (double h, double s, double v, double a) {
+        setColorRadius(new Scalar(h,s,v,a));
+    }
+
     public void setColorRadius(Scalar radius) {
         mColorRadius = radius;
     }

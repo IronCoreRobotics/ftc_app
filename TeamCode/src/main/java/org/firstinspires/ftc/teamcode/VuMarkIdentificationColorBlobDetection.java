@@ -139,7 +139,7 @@ public class VuMarkIdentificationColorBlobDetection extends LinearOpMode {
 
 
         // set color for red and blue detectors
-        blueHolorHsv = new Scalar(158.015625, 144.859375, 87.109375, 0.0);     //(h,s,v,a);
+        blueHolorHsv = new Scalar(143.15625, 220.328125, 170.765625, 0.0);    //(h,s,v,a);
         redHolorHsv = new Scalar(255);     //(h,s,v,a);
 
         CONTOUR_COLOR = new Scalar(255, 0, 0, 255);     //(h,s,v,a);
