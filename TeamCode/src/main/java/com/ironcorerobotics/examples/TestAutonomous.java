@@ -1,43 +1,52 @@
 package com.ironcorerobotics.examples;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 /**
  * Created by shawneverly on 8/19/17.
  */
-//@Autonomous(name = "TestAutonomous")
-@Disabled
+@Autonomous(name = "Test Motor Count")
+//@Disabled
 public class TestAutonomous extends LinearOpMode{
 
-    DcMotor leftSide;
-    DcMotor rightSide;
+    DcMotor motor1;
 
     public void runOpMode() throws InterruptedException {
 
-        leftSide = hardwareMap.dcMotor.get("left_drive");
-        rightSide = hardwareMap.dcMotor.get("right_drive");
-
-        rightSide.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor1 = hardwareMap.dcMotor.get("Test_Motor_2");
 
         waitForStart();
 
-        int startPosition = leftSide.getCurrentPosition();
-        int currentPosition = leftSide.getCurrentPosition();
+        while(opModeIsActive())
+        {
+            motor1.setPower(-1.00);
 
-        leftSide.setPower(0.4);
-        rightSide.setPower(0.4);
+            telemetry.addData("Value", motor1.getCurrentPosition());
 
-        sleep(1000);
-        while((currentPosition - startPosition) < 1120) {
-            currentPosition = leftSide.getCurrentPosition();
+            telemetry.update();
         }
-
-        leftSide.setPower(0);
-        rightSide.setPower(0);
+//        leftSide = hardwareMap.dcMotor.get("left_drive");
+//        rightSide = hardwareMap.dcMotor.get("right_drive");
+//
+//        rightSide.setDirection(DcMotorSimple.Direction.REVERSE);
+//
+//        waitForStart();
+//
+//        int startPosition = leftSide.getCurrentPosition();
+//        int currentPosition = leftSide.getCurrentPosition();
+//
+//        leftSide.setPower(0.4);
+//        rightSide.setPower(0.4);
+//
+//        sleep(1000);
+//        while((currentPosition - startPosition) < 1120) {
+//            currentPosition = leftSide.getCurrentPosition();
+//        }
+//
+//        leftSide.setPower(0);
+//        rightSide.setPower(0);
     }
 
 }
