@@ -1,8 +1,10 @@
-package org.firstinspires.ftc.teamcode;
+package com.ironcorerobotics.TestPrograms;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import com.ironcorerobotics.ControlClasses.MotorControl;
 
 /**
  * Created by Fam on 10/28/2017.

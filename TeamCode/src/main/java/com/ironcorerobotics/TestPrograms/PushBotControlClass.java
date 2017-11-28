@@ -1,5 +1,6 @@
-package org.firstinspires.ftc.teamcode;
+package com.ironcorerobotics.TestPrograms;
 
+import com.ironcorerobotics.ControlClasses.MotorControl;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;

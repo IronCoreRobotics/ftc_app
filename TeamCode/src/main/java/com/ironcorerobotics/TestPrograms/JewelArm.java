@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package com.ironcorerobotics.TestPrograms;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import com.ironcorerobotics.ControlClasses.MotorControl;
 
 /**
  * Created by Fam on 11/7/2017.

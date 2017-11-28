@@ -30,8 +30,8 @@ public class LiftSystem extends OpMode{
         rightGrip = hardwareMap.servo.get("right_grip");
         leftGrip = hardwareMap.servo.get("left_grip");
 
-        rightGrip.setPosition(0.51);
-        leftGrip.setPosition(0.7);
+        rightGrip.setPosition(0.9);
+        leftGrip.setPosition(0.4);
 
         lift = hardwareMap.dcMotor.get("LiftMotor");
 
@@ -41,6 +41,9 @@ public class LiftSystem extends OpMode{
 
         gripperPosition = 1;
         wasPressed = false;
+
+        telemetry.addData("Right grip position",rightGrip.getPosition());
+        telemetry.addData("Left grip position",leftGrip.getPosition());
     }
 
     @Override
@@ -78,27 +81,33 @@ public class LiftSystem extends OpMode{
             gripperPosition = 3;
         }
 
+        telemetry.addData("Right grip position", rightGrip.getPosition());
+        telemetry.addData("Left grip position", leftGrip.getPosition());
 
         if(gripperPosition == 2) {        //Slightly open
-            rightGrip.setPosition(0.43);
-            leftGrip.setPosition(0.83);
+            rightGrip.setPosition(0.6);
+            leftGrip.setPosition(0.666);
         }
         else if(gripperPosition == 3){    //Closed
-            rightGrip.setPosition(0.35);
-            leftGrip.setPosition(0.95);
+            rightGrip.setPosition(0.23);
+            leftGrip.setPosition(0.94);
         }
         else if(gripperPosition == 1){    //Open
-            rightGrip.setPosition(0.51);
-            leftGrip.setPosition(0.7);
+            rightGrip.setPosition(0.9);
+            leftGrip.setPosition(0.4);
         }
     }
 
     private void controlLift(Gamepad gamepad) {
+        telemetry.addData("Lift Status ", lift.isBusy());
         if (gamepad.b && !lift.isBusy()) {
-            lift.setTargetPosition(3240 + zeroPoint);
+            telemetry.addData("Middle",lift.getCurrentPosition());
+            lift.setTargetPosition(1290 + zeroPoint);
         } else if (gamepad.y && !lift.isBusy()) {
-            lift.setTargetPosition(6480 + zeroPoint);
+            telemetry.addData("Top", lift.getCurrentPosition());
+            lift.setTargetPosition(2500 + zeroPoint);
         } else if (gamepad.a && !lift.isBusy()) {
+            telemetry.addData("Bottom",lift.getCurrentPosition());
             lift.setTargetPosition(zeroPoint);
         }
     }

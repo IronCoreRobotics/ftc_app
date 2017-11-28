@@ -9,23 +9,24 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 @TeleOp(name = "GripSetter1")
-//@Disabled
+
 public class GripSetter extends OpMode {
 
     Servo servo1;
+
     Servo servo2;
 
     @Override
     public void init() {
 
-        servo1 = hardwareMap.servo.get("Servo1");
-        servo2 = hardwareMap.servo.get("Servo2");
+        servo1 = hardwareMap.servo.get("right_grip");
+        servo2 = hardwareMap.servo.get("left_grip");
 
 
     }
 
     @Override
-    public void loop() {
+        public void loop() {
 
         servo1.setPosition(gamepad1.left_trigger);
         servo2.setPosition(gamepad1.right_trigger);

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package com.ironcorerobotics.ControlClasses;
 
 /**
  * Created by Fam on 9/23/2017.
@@ -36,6 +36,10 @@ public class MotorControl
 
     {
         return ControlMotorSpeed();
+    }
+
+    public double getSpeed() {
+        return Speed;
     }
 
     private void setControlledSpeed(double ControlledSpeed)

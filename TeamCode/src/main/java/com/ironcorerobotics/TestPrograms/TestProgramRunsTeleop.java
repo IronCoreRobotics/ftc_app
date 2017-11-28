@@ -1,10 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package com.ironcorerobotics.TestPrograms;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import com.ironcorerobotics.ControlClasses.MotorControl;
 
 /**
  * Created by Fam on 10/31/2017.
@@ -91,14 +93,14 @@ import com.qualcomm.robotcore.hardware.Servo;
         rightGrip = hardwareMap.servo.get("right_grip");
         leftGrip = hardwareMap.servo.get("left_grip");
 
-        rightGrip.setPosition(0.51);
-        leftGrip.setPosition(0.7);
+        rightGrip.setPosition(0.9);
+        leftGrip.setPosition(0.4);
 
         lift = hardwareMap.dcMotor.get("LiftMotor");
 
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         zeroPoint = lift.getCurrentPosition();
-        lift.setPower(1);
+        lift.setPower(0.75);
     }
 
 
@@ -128,24 +130,30 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
         if(gripperPosition == 2) {        //Slightly open
-            rightGrip.setPosition(0.43);
-            leftGrip.setPosition(0.83);
+            rightGrip.setPosition(0.7);
+            leftGrip.setPosition(0.56);
+            telemetry.addData("Right grip position", rightGrip.getPosition());
+            telemetry.addData("Left grip position", leftGrip.getPosition());
         }
         else if(gripperPosition == 3){    //Closed
-            rightGrip.setPosition(0.35);
-            leftGrip.setPosition(0.95);
+            rightGrip.setPosition(0.23);
+            leftGrip.setPosition(0.94);
+            telemetry.addData("Right grip position", rightGrip.getPosition());
+            telemetry.addData("Left grip position", leftGrip.getPosition());
         }
         else if(gripperPosition == 1){    //Open
-            rightGrip.setPosition(0.51);
-            leftGrip.setPosition(0.7);
+            rightGrip.setPosition(0.9);
+            leftGrip.setPosition(0.4);
+            telemetry.addData("Right grip position", rightGrip.getPosition());
+            telemetry.addData("Left grip position", leftGrip.getPosition());
         }
     }
 
     private void controlLift(Gamepad gamepad) {
         if (gamepad.b && !lift.isBusy()) {
-            lift.setTargetPosition(3240 + zeroPoint);
+            lift.setTargetPosition(1290 + zeroPoint);
         } else if (gamepad.y && !lift.isBusy()) {
-            lift.setTargetPosition(6480 + zeroPoint);
+            lift.setTargetPosition(2500 + zeroPoint);
         } else if (gamepad.a && !lift.isBusy()) {
             lift.setTargetPosition(zeroPoint);
         }
