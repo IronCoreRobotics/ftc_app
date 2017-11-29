@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by Fam on 11/9/2017.
  */
 
-@Autonomous(name = "Auto Quad 3 Red", group = "Test")
+@Autonomous(name = "Auto Quad 3 Red New", group = "Test")
 
 public class AutonomousQuadrant3Red extends LinearOpMode
 

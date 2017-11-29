@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by Fam on 11/9/2017.
  */
 
-@Autonomous(name = "Auto Quad 2 Blue", group = "Test")
+@Autonomous(name = "Auto Quad 2 Blue New", group = "Test")
 
 public class AutonomousQuadrant2Blue extends LinearOpMode
 

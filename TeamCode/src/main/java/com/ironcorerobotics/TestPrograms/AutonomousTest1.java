@@ -1,6 +1,7 @@
 package com.ironcorerobotics.TestPrograms;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -11,6 +12,7 @@ import com.ironcorerobotics.ControlClasses.MotorControl;
  */
 
 @Autonomous(name = "Autonomous Test 1", group = "Test")
+@Disabled
 
 public class AutonomousTest1 extends LinearOpMode
 

@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by Fam on 11/9/2017.
  */
 
-@Autonomous(name = "Auto Quad 1 Red", group = "Test")
+@Autonomous(name = "Auto Quad 1 Red New", group = "Test")
 
 public class AutonomousQuadrant1Red extends LinearOpMode
 
@@ -36,54 +36,47 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         waitForStart();
 
-        JewelScoreAutonomous("Red");
+        servo1.setPosition(.53);
+
+        sleep(3000);
+
+        JewelScoreAutonomous("Blue");
     }
 
     public void JewelScoreAutonomous(String AllianceColor)
 
     {
-
+        servo1.setPosition(.8);
         servo1.setPosition(0);
 
-        sleep(1000);
+        sleep(500);
 
         if (AllianceColor == "Blue")
 
         {
 
             if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-                motor2.setPower(-.30); //backwards
+                autoCustomDrive("Drive", 1.00);
 
-                sleep(350);
+                brake();
 
-                motor2.setPower(0);
+                servo1.setPosition(.53);
 
-                servo1.setPosition(.7);
+                sleep(500);
 
-                sleep(1000);
-
-                motor2.setPower(.30);
-
-                sleep(250);
-
-
+                autoCustomDrive("Reverse", 1.00);
             }
 
             if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                motor1.setPower(.30);
+                autoCustomDrive("Reverse", 1.00);
 
-                sleep(350);
+               brake();
 
-                motor1.setPower(0);
-                motor2.setPower(0);
+                servo1.setPosition(.53);
 
-                servo1.setPosition(.7);
+                sleep(500);
 
-                sleep(1000);
-
-                motor1.setPower(-.30);
-
-                sleep(250);
+                autoCustomDrive("Drive", 1.00);
             }
         }
 
@@ -91,46 +84,34 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         {
 
-            if (sensorColor.red() > sensorColor.blue()&& opModeIsActive()) {
-                motor2.setPower(.30);
+            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
+                autoCustomDrive("Reverse", 1.00);
 
-                sleep(350);
-
-                motor2.setPower(0);
+                brake();
 
                 servo1.setPosition(.7);
 
-                sleep(1000);
+                sleep(500);
 
-                motor2.setPower(-.30);
-
-                sleep(250);
+                autoCustomDrive("Drive", 1.00);
 
 
             }
 
-            if (sensorColor.red() < sensorColor.blue()&& opModeIsActive()) {
-                motor1.setPower(-.30);
+            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
+                autoCustomDrive("Drive", 1.00);
 
-                sleep(350);
-
-                motor1.setPower(0);
-                motor2.setPower(0);
+                brake();
 
                 servo1.setPosition(.7);
 
                 sleep(1000);
 
-                motor1.setPower(.30);
-
-                sleep(250);
+                autoCustomDrive("Reverse", 1.00);
             }
         }
 
-        motor1.setPower(0);
-        motor2.setPower(0);
-
-        sleep(1000);
+       brake();
     }
 
     public void autoDrive(int distance, String direction, double speed)

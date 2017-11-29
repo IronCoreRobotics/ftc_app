@@ -1,6 +1,7 @@
 package com.ironcorerobotics.TestPrograms;
 
 import com.ironcorerobotics.ControlClasses.MotorControl;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -12,6 +13,7 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
  */
 
 @TeleOp(name = "PushBotTest")
+@Disabled
 
 public class PushBotControlClass extends OpMode
 

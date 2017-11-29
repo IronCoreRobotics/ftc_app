@@ -12,7 +12,8 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 
-@TeleOp(name = "Teleop")
+@TeleOp(name = "TeleopFranklins")
+//@Disabled
 
 public class TeleopFantasticFranklins extends OpMode {
 
