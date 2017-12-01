@@ -17,9 +17,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class AutonomousQuadrant1Red extends LinearOpMode
 
 {
+    int zeroPoint;
     DcMotor motor1;
     DcMotor motor2;
-    Servo servo1;
+    Servo jewelSlapper;
+    Servo rightGrip;
+    Servo leftGrip;
+    DcMotor lift;
     ColorSensor sensorColor;
     DistanceSensor sensorDistance;
     MotorControl controlMotor2 = new MotorControl(-1);
@@ -29,54 +33,54 @@ public class AutonomousQuadrant1Red extends LinearOpMode
     {
         motor1 = hardwareMap.dcMotor.get("rightside_Motor");
         motor2 = hardwareMap.dcMotor.get("leftside_Motor");
-        servo1 = hardwareMap.servo.get("drawbridge_winch");
+        jewelSlapper = hardwareMap.servo.get("drawbridge_winch");
         sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
         sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_color_distance");
 
-
         waitForStart();
 
-        servo1.setPosition(.53);
+        initGLS();
 
-        sleep(3000);
+        rightGrip.setPosition(0.9);
+        leftGrip.setPosition(0.4);
 
-        JewelScoreAutonomous("Blue");
+        lift.setTargetPosition(1290 + zeroPoint);
+
+        sleep(4000);
+
+        jewelSlapper.setPosition(.53);
+
+        JewelScoreAutonomous("Red");
     }
 
     public void JewelScoreAutonomous(String AllianceColor)
 
     {
-        servo1.setPosition(.8);
-        servo1.setPosition(0);
-
-        sleep(500);
+        jewelSlapper.setPosition(.7);
+        jewelSlapper.setPosition(0.2);
 
         if (AllianceColor == "Blue")
 
         {
 
             if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-                autoCustomDrive("Drive", 1.00);
+                autoDrive(500, "Reverse", 1.00);
 
                 brake();
 
-                servo1.setPosition(.53);
+                jewelSlapper.setPosition(.53);
 
-                sleep(500);
-
-                autoCustomDrive("Reverse", 1.00);
+                autoDrive(500, "Drive", 1.00);
             }
 
             if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                autoCustomDrive("Reverse", 1.00);
+                autoDrive(500, "Drive", 1.00);
 
-               brake();
+                brake();
 
-                servo1.setPosition(.53);
+                jewelSlapper.setPosition(.53);
 
-                sleep(500);
-
-                autoCustomDrive("Drive", 1.00);
+                autoDrive(500, "Reverse", 1.00);
             }
         }
 
@@ -85,33 +89,31 @@ public class AutonomousQuadrant1Red extends LinearOpMode
         {
 
             if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-                autoCustomDrive("Reverse", 1.00);
+                if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
+                    autoDrive(500, "Drive", 1.00);
 
-                brake();
+                    brake();
 
-                servo1.setPosition(.7);
+                    jewelSlapper.setPosition(.53);
 
-                sleep(500);
-
-                autoCustomDrive("Drive", 1.00);
-
-
+                    autoDrive(500, "Reverse", 1.00);
+                }
             }
 
             if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                autoCustomDrive("Drive", 1.00);
+                autoDrive(500, "Reverse", 1.00);
 
                 brake();
 
-                servo1.setPosition(.7);
+                jewelSlapper.setPosition(.53);
 
-                sleep(1000);
-
-                autoCustomDrive("Reverse", 1.00);
+                autoDrive(500, "Drive", 1.00);
             }
         }
 
        brake();
+
+        sleep(1000);
     }
 
     public void autoDrive(int distance, String direction, double speed)
@@ -219,5 +221,19 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         motor1.setTargetPosition(motor1.getCurrentPosition());
         motor2.setTargetPosition(motor2.getCurrentPosition());
+    }
+
+    private void initGLS() {
+        rightGrip = hardwareMap.servo.get("right_grip");
+        leftGrip = hardwareMap.servo.get("left_grip");
+
+        rightGrip.setPosition(0.23);
+        leftGrip.setPosition(0.94);
+
+        lift = hardwareMap.dcMotor.get("LiftMotor");
+
+        lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        zeroPoint = lift.getCurrentPosition();
+        lift.setPower(0.75);
     }
 }
