@@ -46,18 +46,28 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         lift.setTargetPosition(1290 + zeroPoint);
 
-        sleep(4000);
-
         jewelSlapper.setPosition(.53);
 
-        JewelScoreAutonomous("Red");
+        sleep(1000);
+
+        jewelSlapper.setPosition(.7);
+
+        sleep(1000);
+
+        jewelSlapper.setPosition(0.012);
+
+        sleep(1000);
+
+        jewelSlapper.setPosition(0.53);
+
+        //JewelScoreAutonomous("Red");
     }
 
     public void JewelScoreAutonomous(String AllianceColor)
 
     {
         jewelSlapper.setPosition(.7);
-        jewelSlapper.setPosition(0.2);
+        jewelSlapper.setPosition(0);
 
         if (AllianceColor == "Blue")
 

@@ -90,8 +90,8 @@ public class TeleopFantasticFranklins extends OpMode {
             rightGrip = hardwareMap.servo.get("right_grip");
             leftGrip = hardwareMap.servo.get("left_grip");
 
-            rightGrip.setPosition(0.9);
-            leftGrip.setPosition(0.4);
+//            rightGrip.setPosition(0.9);
+//            leftGrip.setPosition(0.4);
 
             lift = hardwareMap.dcMotor.get("LiftMotor");
 
@@ -105,13 +105,13 @@ public class TeleopFantasticFranklins extends OpMode {
             if(gamepad.right_bumper){
                 if(!wasPressed){
                     wasPressed = true;
-                    gripperPosition += 1;
+                    gripperPosition -= 1;
                 }
             }
             else if(gamepad.left_bumper){
                 if(!wasPressed){
                     wasPressed = true;
-                    gripperPosition -= 1;
+                    gripperPosition += 1;
                 }
             }
             else{
@@ -127,20 +127,20 @@ public class TeleopFantasticFranklins extends OpMode {
 
 
             if(gripperPosition == 2) {        //Slightly open
-                rightGrip.setPosition(0.7);
-                leftGrip.setPosition(0.56);
+                rightGrip.setPosition(0.46);
+                leftGrip.setPosition(0.78);
                 telemetry.addData("Right grip position", rightGrip.getPosition());
                 telemetry.addData("Left grip position", leftGrip.getPosition());
             }
             else if(gripperPosition == 3){    //Closed
-                rightGrip.setPosition(0.23);
-                leftGrip.setPosition(0.94);
+                rightGrip.setPosition(0.33);
+                leftGrip.setPosition(0.9);
                 telemetry.addData("Right grip position", rightGrip.getPosition());
                 telemetry.addData("Left grip position", leftGrip.getPosition());
             }
             else if(gripperPosition == 1){    //Open
-                rightGrip.setPosition(0.9);
-                leftGrip.setPosition(0.4);
+                rightGrip.setPosition(0.7);
+                leftGrip.setPosition(0.56);
                 telemetry.addData("Right grip position", rightGrip.getPosition());
                 telemetry.addData("Left grip position", leftGrip.getPosition());
             }
@@ -148,9 +148,9 @@ public class TeleopFantasticFranklins extends OpMode {
 
         private void controlLift(Gamepad gamepad) {
             if (gamepad.b && !lift.isBusy()) {
-                lift.setTargetPosition(1290 + zeroPoint);
+                lift.setTargetPosition(1350 + zeroPoint);
             } else if (gamepad.y && !lift.isBusy()) {
-                lift.setTargetPosition(2500 + zeroPoint);
+                lift.setTargetPosition(2650 + zeroPoint);
             } else if (gamepad.a && !lift.isBusy()) {
                 lift.setTargetPosition(zeroPoint);
             }
