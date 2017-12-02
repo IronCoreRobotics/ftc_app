@@ -137,6 +137,7 @@ public class TeleopFantasticFranklins extends OpMode {
                 leftGrip.setPosition(0.9);
                 telemetry.addData("Right grip position", rightGrip.getPosition());
                 telemetry.addData("Left grip position", leftGrip.getPosition());
+
             }
             else if(gripperPosition == 1){    //Open
                 rightGrip.setPosition(0.7);
