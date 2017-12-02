@@ -21,8 +21,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * Created by Fam on 12/1/2017.
  */
 
-@Autonomous(name = "TestAutonomous", group = "Test")
-@Disabled
+@Autonomous(name = "Vuforia_ReturnMethod", group = "Test")
+//@Disabled
 
 
 public class Vuforia_ReturnMethod extends LinearOpMode
@@ -35,8 +35,7 @@ public class Vuforia_ReturnMethod extends LinearOpMode
 
     VuforiaLocalizer vuforia;
 
-    public void runOpMode() throws InterruptedException
-    {
+    public void runOpMode() throws InterruptedException {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
@@ -55,13 +54,14 @@ public class Vuforia_ReturnMethod extends LinearOpMode
 
         relicTrackables.activate();
 
+        while (opModeIsActive()) {
+
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-            if (vuMark != RelicRecoveryVuMark.UNKNOWN)
-            {
+            if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
                 telemetry.addData("VuMark", "%s visible", vuMark);
 
-                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
+                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
                 telemetry.addData("Pose", format(pose));
 
                 if (pose != null) {
@@ -78,27 +78,24 @@ public class Vuforia_ReturnMethod extends LinearOpMode
                     double rY = rot.secondAngle;
                     double rZ = rot.thirdAngle;
 
-                    if(vuMark == RelicRecoveryVuMark.CENTER)
-                    {
+                    if (vuMark == RelicRecoveryVuMark.CENTER) {
                         CryptoboxCipherColumnNumber = "Center";
                     }
-                    if(vuMark == RelicRecoveryVuMark.RIGHT)
-                    {
+                    if (vuMark == RelicRecoveryVuMark.RIGHT) {
                         CryptoboxCipherColumnNumber = "Right";
                     }
-                    if(vuMark == RelicRecoveryVuMark.LEFT)
-                    {
+                    if (vuMark == RelicRecoveryVuMark.LEFT) {
                         CryptoboxCipherColumnNumber = "Left";
                     }
 
                 }
-            }
-            else {
+            } else {
                 telemetry.addData("VuMark", "not visible");
             }
 
             telemetry.update();
         }
+    }
 
 
     String format(OpenGLMatrix transformationMatrix) {
