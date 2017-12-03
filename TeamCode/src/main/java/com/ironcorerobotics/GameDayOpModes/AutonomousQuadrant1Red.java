@@ -39,58 +39,108 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         waitForStart();
 
-        initGLS();
+        initGripper();
 
-        rightGrip.setPosition(0.9);
-        leftGrip.setPosition(0.4);
-
-        lift.setTargetPosition(1290 + zeroPoint);
+        leftGrip.setPosition(0.30);
+        rightGrip.setPosition(.95);
 
         jewelSlapper.setPosition(.53);
 
         sleep(1000);
 
-        jewelSlapper.setPosition(.7);
+        initLifter();
+
+        lift.setTargetPosition(1350 + zeroPoint);
 
         sleep(1000);
 
-        jewelSlapper.setPosition(0.012);
+        // JewelScoreAutonomous("Red", 200);
+
+        autoDrive(200, "Drive", .30);
+
+        brake();
+
+        autoDrive(200, "Reverse", .30);
+
+        brake();
+
+        //line up to cryptobox
+
+        autoDrive(3050, "Reverse", .50);
+
+        brake();
+
+        //center column
+
+        autoDrive(1220, "Left", .50);
+
+        brake();
+
+        autoDrive(500, "Drive", .30);
+
+        brake();
+
+        //special assurance
+
+        leftGrip.setPosition(0.45);
+        rightGrip.setPosition(0.8);
+
+        sleep(500);
+
+        autoDrive(750, "Reverse", .30);
+
+        brake();
+
+        leftGrip.setPosition(0.30);
+        rightGrip.setPosition(.95);
 
         sleep(1000);
 
-        jewelSlapper.setPosition(0.53);
+        lift.setTargetPosition(zeroPoint);
 
-        //JewelScoreAutonomous("Red");
+        sleep(1000);
+
+        autoDrive(400, "Drive", .10);
+
+        autoDrive(150, "Drive", .75);
+
+        brake();
+
+        autoDrive(100, "Reverse", .30);
+
+        brake();
+
+        sleep(1000);
     }
 
-    public void JewelScoreAutonomous(String AllianceColor)
+    public void JewelScoreAutonomous(String AllianceColor, int knockOffDistance)
 
     {
-        jewelSlapper.setPosition(.7);
-        jewelSlapper.setPosition(0);
+//        jewelSlapper.setPosition(.7);
+//        jewelSlapper.setPosition(0);
 
         if (AllianceColor == "Blue")
 
         {
 
             if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-                autoDrive(500, "Reverse", 1.00);
+                autoDrive(knockOffDistance, "Reverse", .30);
 
                 brake();
 
-                jewelSlapper.setPosition(.53);
+                //jewelSlapper.setPosition(.53);
 
-                autoDrive(500, "Drive", 1.00);
+                autoDrive(knockOffDistance, "Drive", .30);
             }
 
             if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                autoDrive(500, "Drive", 1.00);
+                autoDrive(knockOffDistance, "Drive", .30);
 
                 brake();
 
-                jewelSlapper.setPosition(.53);
+                //jewelSlapper.setPosition(.53);
 
-                autoDrive(500, "Reverse", 1.00);
+                autoDrive(knockOffDistance, "Reverse", .30);
             }
         }
 
@@ -100,24 +150,24 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
             if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
                 if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                    autoDrive(500, "Drive", 1.00);
+                    autoDrive(knockOffDistance, "Drive", .30);
 
                     brake();
 
-                    jewelSlapper.setPosition(.53);
+                   // jewelSlapper.setPosition(.53);
 
-                    autoDrive(500, "Reverse", 1.00);
+                    autoDrive(knockOffDistance, "Reverse", .30);
                 }
             }
 
             if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                autoDrive(500, "Reverse", 1.00);
+                autoDrive(knockOffDistance, "Reverse", .30);
 
                 brake();
 
-                jewelSlapper.setPosition(.53);
+                //jewelSlapper.setPosition(.53);
 
-                autoDrive(500, "Drive", 1.00);
+                autoDrive(knockOffDistance, "Drive", .30);
             }
         }
 
@@ -233,17 +283,17 @@ public class AutonomousQuadrant1Red extends LinearOpMode
         motor2.setTargetPosition(motor2.getCurrentPosition());
     }
 
-    private void initGLS() {
+    private void initGripper() {
         rightGrip = hardwareMap.servo.get("right_grip");
         leftGrip = hardwareMap.servo.get("left_grip");
+    }
 
-        rightGrip.setPosition(0.23);
-        leftGrip.setPosition(0.94);
-
+    private void initLifter()
+    {
         lift = hardwareMap.dcMotor.get("LiftMotor");
 
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         zeroPoint = lift.getCurrentPosition();
-        lift.setPower(0.75);
+        lift.setPower(0.50);
     }
 }

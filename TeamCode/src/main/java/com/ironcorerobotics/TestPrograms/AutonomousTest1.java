@@ -1,18 +1,16 @@
 package com.ironcorerobotics.TestPrograms;
 
+import com.ironcorerobotics.ControlClasses.MotorControl;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-import com.ironcorerobotics.ControlClasses.MotorControl;
 
 /**
  * Created by Fam on 10/26/2017.
  */
 
-@Autonomous(name = "Autonomous Test 1", group = "Test")
-@Disabled
+@Autonomous(name = "Drive Testing", group = "Test")
+//@Disabled
 
 public class AutonomousTest1 extends LinearOpMode
 
@@ -31,35 +29,11 @@ public class AutonomousTest1 extends LinearOpMode
 
         waitForStart();
 
-        while (opModeIsActive())
+        autoDrive(250, "Drive", .50);
 
-        {
-
-
-            if (gamepad1.dpad_up == true)
-            {
-                autoCustomDrive("Drive", 1.00);
-            }
-
-        if (gamepad1.dpad_down == true)
-        {
-            autoCustomDrive("Reverse", 1.00);
-        }
-        if (gamepad1.dpad_right == true) {
-            autoCustomDrive("Right", 1.00);
-        }
-        if (gamepad1.dpad_left == true) {
-            autoCustomDrive("Left", 1.00);
-        }
-        if (gamepad1.y == true) {
-            autoCustomDrive("180", 1.00);
-        }
-        else {
             brake();
-        }
-    }
 
-}
+    }
 
     public void autoDrive(int distance, String direction, double speed)
 
@@ -166,6 +140,8 @@ public class AutonomousTest1 extends LinearOpMode
 
             motor1.setTargetPosition(motor1.getCurrentPosition());
             motor2.setTargetPosition(motor2.getCurrentPosition());
+
+        sleep(500);
     }
 }
 

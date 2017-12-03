@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by kidsaccount on 10/25/17.
  */
 
-@TeleOp(name = "GripSetter1")
+@TeleOp(name = "GripSetterNew")
 
 public class GripSetter extends OpMode {
 
@@ -19,8 +19,8 @@ public class GripSetter extends OpMode {
     @Override
     public void init() {
 
-        servo1 = hardwareMap.servo.get("right_grip");
-        servo2 = hardwareMap.servo.get("left_grip");
+        servo1 = hardwareMap.servo.get("left_grip");
+        servo2 = hardwareMap.servo.get("right_grip");
 
 
     }
