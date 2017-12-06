@@ -27,10 +27,11 @@ public class TeleopFantasticFranklins extends OpMode {
         Servo rightGrip;
         Servo leftGrip;
         DcMotor lift;
+     Servo jewelSlapper;
+
 
         DcMotor motor1;
         DcMotor motor2;
-
 
 
         public void init()
@@ -39,11 +40,14 @@ public class TeleopFantasticFranklins extends OpMode {
             initGLS();
             motor1 = hardwareMap.dcMotor.get("rightside_Motor");
             motor2 = hardwareMap.dcMotor.get("leftside_Motor");
+            jewelSlapper = hardwareMap.servo.get("drawbridge_winch");
+
         }
 
         public void loop()
 
         {
+            jewelSlapper.setPosition(.53);
             drive();
             controlLift(gamepad2);
             controlGrip(gamepad2);
@@ -79,6 +83,28 @@ public class TeleopFantasticFranklins extends OpMode {
             {
                 motor1.setPower(-ControlMotor1.getControlledSpeed());
                 motor2.setPower(-ControlMotor2.getControlledSpeed());
+            }
+            else if (gamepad1.right_trigger == 1.0)
+            {
+                brake();
+            }
+            else if (gamepad1.x == true)
+            {
+                autoDrive(100, "Drive", 1.00);
+
+                autoDrive(300, "Left", 1.00);
+
+                brake();
+
+                autoDrive(300, "Right",1.00);
+            }
+            else if(gamepad1.y == true)
+            {
+                autoDrive(300, "Reverse", 1.00);
+
+                autoDrive(800, "Drive", 1.00);
+
+                brake();
             }
             else
             {
@@ -140,8 +166,8 @@ public class TeleopFantasticFranklins extends OpMode {
 
             }
             else if(gripperPosition == 1){    //Open
-                leftGrip.setPosition(0.6);
-                rightGrip.setPosition(0.65);
+                leftGrip.setPosition(0.53);
+                rightGrip.setPosition(0.73);
                 telemetry.addData("Right grip position", rightGrip.getPosition());
                 telemetry.addData("Left grip position", leftGrip.getPosition());
             }
@@ -156,6 +182,57 @@ public class TeleopFantasticFranklins extends OpMode {
                 lift.setTargetPosition(zeroPoint);
             }
         }
+    public void brake()
+
+    {
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motor1.setTargetPosition(motor1.getCurrentPosition());
+        motor2.setTargetPosition(motor2.getCurrentPosition());
+    }
+
+    public void autoDrive(int distance, String direction, double speed)
+
+    {
+        motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        int startPosition = motor1.getCurrentPosition();
+
+        if(direction == "Drive")
+        {
+            while(startPosition + distance > motor1.getCurrentPosition())
+            {
+                motor1.setPower(speed);
+                motor2.setPower(-1*speed);
+            }
+        }
+
+        if(direction == "Reverse")
+        {
+            while(startPosition - distance < motor1.getCurrentPosition())
+            {
+                motor1.setPower(-speed);
+                motor2.setPower(-speed*-1);
+            }
+        }
+        if(direction == "Right")
+        {
+            while(startPosition - distance < motor1.getCurrentPosition() )
+            {
+                motor1.setPower(-speed);
+                motor2.setPower(speed*-1);
+            }
+        }
+        if(direction == "Left")
+        {
+            while(startPosition + distance > motor1.getCurrentPosition())
+            {
+                motor1.setPower(speed);
+                motor2.setPower(-speed*-1);
+            }
+        }
+    }
 
     }
 

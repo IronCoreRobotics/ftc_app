@@ -44,7 +44,7 @@ public class AutonomousQuadrant1Red extends LinearOpMode
         leftGrip.setPosition(0.30);
         rightGrip.setPosition(.95);
 
-        jewelSlapper.setPosition(.53);
+        jewelSlapper.setPosition(.54);
 
         sleep(1000);
 
@@ -54,27 +54,35 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         sleep(1000);
 
-        // JewelScoreAutonomous("Red", 200);
-
-        autoDrive(200, "Drive", .30);
+        autoDrive(50, "Drive", .10);
 
         brake();
 
-        autoDrive(200, "Reverse", .30);
+        sleep(1000);
 
-        brake();
+        jewelSlapper.setPosition(0);
+
+        sleep(1000);
+
+        JewelScoreAutonomous("Red", 200);
+
+        sleep(2000);
 
         //line up to cryptobox
 
-        autoDrive(3050, "Reverse", .50);
+        autoDrive(3090, "Reverse", .50);
 
         brake();
 
         //center column
 
-        autoDrive(1220, "Left", .50);
+        autoDrive(1185, "Left", .50);
 
         brake();
+
+        lift.setTargetPosition(50+zeroPoint);
+
+        sleep(1000);
 
         autoDrive(500, "Drive", .30);
 
@@ -96,10 +104,6 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         sleep(1000);
 
-        lift.setTargetPosition(zeroPoint);
-
-        sleep(1000);
-
         autoDrive(400, "Drive", .10);
 
         autoDrive(150, "Drive", .75);
@@ -116,31 +120,33 @@ public class AutonomousQuadrant1Red extends LinearOpMode
     public void JewelScoreAutonomous(String AllianceColor, int knockOffDistance)
 
     {
-//        jewelSlapper.setPosition(.7);
-//        jewelSlapper.setPosition(0);
 
         if (AllianceColor == "Blue")
 
         {
 
-            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-                autoDrive(knockOffDistance, "Reverse", .30);
+            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
+                autoDrive(knockOffDistance, "Reverse", .20);
 
                 brake();
 
-                //jewelSlapper.setPosition(.53);
+                jewelSlapper.setPosition(.54);
 
-                autoDrive(knockOffDistance, "Drive", .30);
+                autoDrive(knockOffDistance-50, "Drive", .20);
+
+                brake();
             }
 
-            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                autoDrive(knockOffDistance, "Drive", .30);
+            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
+                autoDrive(knockOffDistance, "Drive", .20);
 
                 brake();
 
-                //jewelSlapper.setPosition(.53);
+                jewelSlapper.setPosition(.54);
 
-                autoDrive(knockOffDistance, "Reverse", .30);
+                autoDrive(knockOffDistance+85, "Reverse", .20);
+
+                brake();
             }
         }
 
@@ -148,26 +154,28 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         {
 
-            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-                if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                    autoDrive(knockOffDistance, "Drive", .30);
+            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
+                    autoDrive(knockOffDistance, "Drive", .20);
 
                     brake();
 
-                   // jewelSlapper.setPosition(.53);
+                   jewelSlapper.setPosition(.54);
 
-                    autoDrive(knockOffDistance, "Reverse", .30);
+                    autoDrive(knockOffDistance+85, "Reverse", .20);
+
+                brake();
                 }
-            }
 
-            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                autoDrive(knockOffDistance, "Reverse", .30);
+            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
+                autoDrive(knockOffDistance, "Reverse", .20);
 
                 brake();
 
-                //jewelSlapper.setPosition(.53);
+                jewelSlapper.setPosition(.54);
 
-                autoDrive(knockOffDistance, "Drive", .30);
+                autoDrive(knockOffDistance-50, "Drive", .20);
+
+                brake();
             }
         }
 
