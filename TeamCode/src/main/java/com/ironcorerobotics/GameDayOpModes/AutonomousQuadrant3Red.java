@@ -44,7 +44,7 @@ public class AutonomousQuadrant3Red extends LinearOpMode
         leftGrip.setPosition(0.30);
         rightGrip.setPosition(.95);
 
-        jewelSlapper.setPosition(.53);
+        jewelSlapper.setPosition(.9);
 
         sleep(1000);
 
@@ -54,7 +54,7 @@ public class AutonomousQuadrant3Red extends LinearOpMode
 
         sleep(1000);
 
-        autoDrive(50, "Drive", .10);
+        autoDrive(25, "Drive", .10);
 
         brake();
 
@@ -62,15 +62,15 @@ public class AutonomousQuadrant3Red extends LinearOpMode
 
         sleep(1000);
 
-        JewelScoreAutonomous("Red", 200);
+        JewelScoreAutonomous("Red", 240);
 
         //line up to cryptobox
 
-        autoDrive(2250, "Reverse", .50);
+        autoDrive(2250, "Reverse", .30);
 
         brake();
 
-        autoDrive(1125, "Left", .50);
+        autoDrive(1125, "Left", .30);
 
         brake();
 
@@ -81,13 +81,15 @@ public class AutonomousQuadrant3Red extends LinearOpMode
         //center column
 
 
-        autoDrive(1135, "Left", .30);
+        autoDrive(1110, "Left", .30);
 
-        autoDrive(50, "Drive", .30);
+        brake();
 
         lift.setTargetPosition(zeroPoint);
 
         sleep(1000);
+
+        autoDrive(50, "Drive", .30);
 
         //special assurance
 
@@ -111,7 +113,7 @@ public class AutonomousQuadrant3Red extends LinearOpMode
 
         brake();
 
-        autoDrive(200, "Reverse", .30);
+        autoDrive(300, "Reverse", .30);
 
         brake();
 
@@ -127,25 +129,25 @@ public class AutonomousQuadrant3Red extends LinearOpMode
         {
 
             if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                autoDrive(knockOffDistance, "Reverse", .20);
+                autoDrive(knockOffDistance, "Reverse", .10);
 
                 brake();
 
-                jewelSlapper.setPosition(.54);
+                jewelSlapper.setPosition(.9);
 
-                autoDrive(knockOffDistance-50, "Drive", .20);
+                autoDrive(knockOffDistance-20, "Drive", .10);
 
                 brake();
             }
 
             if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-                autoDrive(knockOffDistance, "Drive", .20);
+                autoDrive(knockOffDistance, "Drive", .10);
 
                 brake();
 
-                jewelSlapper.setPosition(.54);
+                jewelSlapper.setPosition(.9);
 
-                autoDrive(knockOffDistance+85, "Reverse", .20);
+                autoDrive(knockOffDistance+20, "Reverse", .10);
 
                 brake();
             }
@@ -156,25 +158,25 @@ public class AutonomousQuadrant3Red extends LinearOpMode
         {
 
             if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-                autoDrive(knockOffDistance, "Drive", .20);
+                autoDrive(knockOffDistance, "Drive", .10);
 
                 brake();
 
-                jewelSlapper.setPosition(.54);
+                jewelSlapper.setPosition(.9);
 
-                autoDrive(knockOffDistance+85, "Reverse", .20);
+                autoDrive(knockOffDistance+20, "Reverse", .10);
 
                 brake();
             }
 
             if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-                autoDrive(knockOffDistance, "Reverse", .20);
+                autoDrive(knockOffDistance, "Reverse", .10);
 
                 brake();
 
-                jewelSlapper.setPosition(.54);
+                jewelSlapper.setPosition(.9);
 
-                autoDrive(knockOffDistance-50, "Drive", .20);
+                autoDrive(knockOffDistance-20, "Drive", .10);
 
                 brake();
             }

@@ -1,5 +1,6 @@
 package com.ironcorerobotics.gls;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -9,6 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 @TeleOp(name = "GripSetterNew")
+
+@Disabled
 
 public class GripSetter extends OpMode {
 

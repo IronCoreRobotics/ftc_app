@@ -47,7 +47,7 @@ public class TeleopFantasticFranklins extends OpMode {
         public void loop()
 
         {
-            jewelSlapper.setPosition(.53);
+            jewelSlapper.setPosition(.9);
             drive();
             controlLift(gamepad2);
             controlGrip(gamepad2);
@@ -84,28 +84,17 @@ public class TeleopFantasticFranklins extends OpMode {
                 motor1.setPower(-ControlMotor1.getControlledSpeed());
                 motor2.setPower(-ControlMotor2.getControlledSpeed());
             }
-            else if (gamepad1.right_trigger == 1.0)
-            {
-                brake();
-            }
             else if (gamepad1.x == true)
             {
                 autoDrive(100, "Drive", 1.00);
 
-                autoDrive(300, "Left", 1.00);
+                autoDrive(500, "Left", 1.00);
 
                 brake();
 
-                autoDrive(300, "Right",1.00);
+                autoDrive(500, "Right",1.00);
             }
-            else if(gamepad1.y == true)
-            {
-                autoDrive(300, "Reverse", 1.00);
 
-                autoDrive(800, "Drive", 1.00);
-
-                brake();
-            }
             else
             {
                 motor1.setPower(0);
@@ -175,9 +164,9 @@ public class TeleopFantasticFranklins extends OpMode {
 
         private void controlLift(Gamepad gamepad) {
             if (gamepad.b && !lift.isBusy()) {
-                lift.setTargetPosition(1350 + zeroPoint);
+                lift.setTargetPosition(1380 + zeroPoint);
             } else if (gamepad.y && !lift.isBusy()) {
-                lift.setTargetPosition(2550 + zeroPoint);
+                lift.setTargetPosition(2575 + zeroPoint);
             } else if (gamepad.a && !lift.isBusy()) {
                 lift.setTargetPosition(zeroPoint);
             }

@@ -22,7 +22,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  */
 
 @Autonomous(name = "Vuforia_ReturnMethod", group = "Test")
-//@Disabled
+@Disabled
 
 
 public class Vuforia_ReturnMethod extends LinearOpMode

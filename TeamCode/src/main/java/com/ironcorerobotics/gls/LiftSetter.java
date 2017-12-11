@@ -1,5 +1,6 @@
 package com.ironcorerobotics.gls;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -8,7 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * Created by Fam on 11/4/2017.
  */
 @TeleOp(name = "LiftSetter")
+@Disabled
 public class LiftSetter extends OpMode{
+
 
     DcMotor lift;
 
