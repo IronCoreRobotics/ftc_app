@@ -36,6 +36,7 @@ public class Vuforia_ReturnMethod extends LinearOpMode
     VuforiaLocalizer vuforia;
 
     public void runOpMode() throws InterruptedException {
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
@@ -95,6 +96,8 @@ public class Vuforia_ReturnMethod extends LinearOpMode
 
             telemetry.update();
         }
+
+
     }
 
 
