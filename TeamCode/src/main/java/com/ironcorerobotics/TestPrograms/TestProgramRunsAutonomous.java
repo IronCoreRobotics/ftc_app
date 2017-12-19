@@ -54,7 +54,15 @@ public class TestProgramRunsAutonomous extends LinearOpMode
 
         waitForStart();
 
-        //Vuforia Set Up and Read
+        VuforiaReturnMethod();
+
+        telemetry.addData("Put it in the column to the ", CryptoboxCipherColumnNumber);
+        telemetry.update();
+        sleep(1000);
+        }
+
+    void VuforiaReturnMethod()
+        {
             int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
             VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
@@ -121,10 +129,6 @@ public class TestProgramRunsAutonomous extends LinearOpMode
                 }
 
             }
-
-        telemetry.addData("Put it in the column to the ", CryptoboxCipherColumnNumber);
-        telemetry.update();
-        sleep(1000);
         }
 
     String format(OpenGLMatrix transformationMatrix)
