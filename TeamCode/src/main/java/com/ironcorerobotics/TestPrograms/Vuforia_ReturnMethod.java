@@ -26,7 +26,18 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
 public class Vuforia_ReturnMethod extends LinearOpMode
+
 {
+    //    int zeroPoint;
+//    DcMotor motor1;
+//    DcMotor motor2;
+//    Servo jewelSlapper;
+//    Servo rightGrip;
+//    Servo leftGrip;
+//    DcMotor lift;
+//    ColorSensor sensorColor;
+//    DistanceSensor sensorDistance;
+//    MotorControl controlMotor2 = new MotorControl(-1);
     String CryptoboxCipherColumnNumber;
 
     public static final String TAG = "Vuforia VuMark Sample";
@@ -36,28 +47,46 @@ public class Vuforia_ReturnMethod extends LinearOpMode
     VuforiaLocalizer vuforia;
 
     public void runOpMode() throws InterruptedException {
+//        motor1 = hardwareMap.dcMotor.get("rightside_Motor");
+//        motor2 = hardwareMap.dcMotor.get("leftside_Motor");
+//        jewelSlapper = hardwareMap.servo.get("drawbridge_winch");
+//        sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
+//        sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_color_distance");
 
+        waitForStart();
+
+        VuforiaReturnMethod();
+
+        telemetry.addData("Put it in the column to the ", CryptoboxCipherColumnNumber);
+        telemetry.update();
+        sleep(1000);
+    }
+
+    void VuforiaReturnMethod()
+    {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
         parameters.vuforiaLicenseKey = "AY2Sj5T/////AAAAGbK1+PNyJk13kxB6iOR0OXeFpCnuzJkxQuNxbOeGM1V9Ax0U4auJJxn4JivkjM8f/84A9epsY1c7TUVl+OleOZKhN8Ha6cliyNFIMiycgHaNTSe133CIx6Kzcq1rFZcpzsFjOwvsS6fAyZs0GntOkVQIxeTOphNvJof69RTez61GR7SCfRCEQ+kFQh9whm7i8iRf7algPeEMXOQ8TT1iG/kiGorMqtwkMXuwqBBQ8aB/5TKlMavr7am3tpDEF+HXEhOAIz6nfVK8XuzRAC8GgU66vu4Ylu+Hau113OyBh9Kl4jgKyPeVN9VeImFMGu/HjsnZ9wumZLqGfhoNX3EJ3ureS/vFveah4wOawzCnjRTy";
-
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+        parameters.cameraMonitorFeedback = VuforiaLocalizer.Parameters.CameraMonitorFeedback.AXES;
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
 
         VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
+
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
         telemetry.addData(">", "Press Play to start");
         telemetry.update();
-        waitForStart();
 
         relicTrackables.activate();
 
-        while (opModeIsActive()) {
+        boolean RunVuforia = true;
 
+        while (opModeIsActive() && RunVuforia) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
                 telemetry.addData("VuMark", "%s visible", vuMark);
@@ -78,30 +107,34 @@ public class Vuforia_ReturnMethod extends LinearOpMode
                     double rX = rot.firstAngle;
                     double rY = rot.secondAngle;
                     double rZ = rot.thirdAngle;
-
-                    if (vuMark == RelicRecoveryVuMark.CENTER) {
-                        CryptoboxCipherColumnNumber = "Center";
-                    }
-                    if (vuMark == RelicRecoveryVuMark.RIGHT) {
-                        CryptoboxCipherColumnNumber = "Right";
-                    }
-                    if (vuMark == RelicRecoveryVuMark.LEFT) {
-                        CryptoboxCipherColumnNumber = "Left";
-                    }
-
+                }
+                if (vuMark == RelicRecoveryVuMark.CENTER) {
+                    CryptoboxCipherColumnNumber = "Center";
+                    telemetry.addData("Read It", "Dad is Centered");
+                    telemetry.update();
+                    RunVuforia = false;
+                } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
+                    CryptoboxCipherColumnNumber = "Right";
+                    telemetry.addData("Read It", "Dad is RIGHT");
+                    telemetry.update();
+                    RunVuforia = false;
+                } else if (vuMark == RelicRecoveryVuMark.LEFT) {
+                    CryptoboxCipherColumnNumber = "Left";
+                    telemetry.addData("Read It", "Dad has LEFT");
+                    telemetry.update();
+                    RunVuforia = false;
                 }
             } else {
                 telemetry.addData("VuMark", "not visible");
+                telemetry.update();
             }
 
-            telemetry.update();
         }
-
-
     }
 
+    String format(OpenGLMatrix transformationMatrix)
 
-    String format(OpenGLMatrix transformationMatrix) {
+    {
         return (transformationMatrix != null) ? transformationMatrix.formatAsTransform() : "null";
     }
 }
