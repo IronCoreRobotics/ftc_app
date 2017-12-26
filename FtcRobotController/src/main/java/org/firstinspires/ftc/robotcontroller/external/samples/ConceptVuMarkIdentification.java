@@ -54,7 +54,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * differences between the use of Vuforia for navigation vs VuMark identification.
  *
  * @see ConceptVuforiaNavigation
- * @see VuforiaLocalizer
+ * @see
+ *
  * @see VuforiaTrackableDefaultListener
  * see  ftc_app/doc/tutorial/FTC_FieldCoordinateSystemDefinition.pdf
  *
