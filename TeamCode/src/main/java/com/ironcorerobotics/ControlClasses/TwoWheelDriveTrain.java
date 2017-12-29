@@ -30,6 +30,7 @@ public class TwoWheelDriveTrain
         motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         int startPosition = motor1.getCurrentPosition();
 
+
         if(direction == "Drive")
         {
             while(startPosition + distance > motor1.getCurrentPosition() && getOpModeCondition())
