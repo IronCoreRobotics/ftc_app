@@ -16,50 +16,64 @@ public class TestAutonomous extends LinearOpMode {
     DcMotor motor1;
     DcMotor motor2;
     public TwoWheelDriveTrain Chassis;
-   // boolean run = true;
 
     public void runOpMode() throws InterruptedException {
 
         motor1 = hardwareMap.dcMotor.get("rightside_Motor");
         motor2 = hardwareMap.dcMotor.get("leftside_Motor");
-        MotorControl controlMotor2 = new MotorControl(-1);
-        Chassis = new TwoWheelDriveTrain(motor1, motor2, controlMotor2, opModeIsActive());
 
         waitForStart();
 
-        final Thread t1 = new Thread(){
-            public void run(){
-                while (opModeIsActive()){
+        MotorControl controlMotor2 = new MotorControl(-1);
+        Chassis = new TwoWheelDriveTrain(motor1, motor2, controlMotor2, false);
+
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motor1.setTargetPosition(motor1.getCurrentPosition());
+        motor2.setTargetPosition(motor2.getCurrentPosition());
+
+        sleep(1000);
+
+        final Thread t1 = new Thread() {
+            public void run() {
+
+                while (Chassis.isOpModeState() && opModeIsActive()) {
                     telemetry.addLine("I am running the robot");
                     telemetry.update();
-                }
-            }};
+                    Chassis.autoDrive(1000, "Right", .20);
+                    Chassis.brake();
+                    Chassis.setOpModeState(false);
 
-        Thread t2 = new Thread(){
-            public void run(){
-                while(opModeIsActive()) {
+                }
+            }
+        };
+
+        Thread t2 = new Thread() {
+            public void run() {
+                while (opModeIsActive()) {
                     telemetry.addLine("I am monitoring the opMode status");
-                    if (opModeIsActive())
-                    {
+                    if (opModeIsActive()) {
                         telemetry.addLine("We are good");
                     }
-                    if(opModeIsActive() == false)
-                    {
+                    if (opModeIsActive() == false) {
                         t1.interrupt();
                     }
                     telemetry.update();
                 }
-            }};
+            }
+        };
 
+        Chassis.setOpModeState(true);
 
         t2.start();
         t1.start();
 
-        while (opModeIsActive())
-        {
-            t2.run();
-            t1.run();
-        }
+        t2.run();
+        t1.run();
+
+    }
+}
 
 //
 //        Chassis.setOpModeState(true);
@@ -87,10 +101,6 @@ public class TestAutonomous extends LinearOpMode {
 //            }
 //            telemetry.update();
 //        }
-
-
-    }
-}
 
 
 
