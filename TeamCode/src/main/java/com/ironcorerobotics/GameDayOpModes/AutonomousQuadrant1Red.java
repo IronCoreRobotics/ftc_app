@@ -1,8 +1,6 @@
 package com.ironcorerobotics.GameDayOpModes;
 
 import com.ironcorerobotics.ControlClasses.MotorControl;
-import com.ironcorerobotics.ControlClasses.TheAutonomousREXSuper;
-import com.ironcorerobotics.ControlClasses.TwoWheelDriveTrain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -29,8 +27,6 @@ public class AutonomousQuadrant1Red extends LinearOpMode
     ColorSensor sensorColor;
     DistanceSensor sensorDistance;
     MotorControl controlMotor2 = new MotorControl(-1);
-    TwoWheelDriveTrain Drive = new TwoWheelDriveTrain(opModeIsActive());
-    TheAutonomousREXSuper REXIE = new TheAutonomousREXSuper(opModeIsActive(), Drive);
 
     @Override public void runOpMode() throws InterruptedException
 
@@ -42,8 +38,6 @@ public class AutonomousQuadrant1Red extends LinearOpMode
         sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_color_distance");
 
         waitForStart();
-
-        REXIE.Drive().autoDrive(100, "Drive", 1.00);
 
         initGripper();
 

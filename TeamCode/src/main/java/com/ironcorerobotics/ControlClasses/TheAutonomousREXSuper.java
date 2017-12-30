@@ -7,11 +7,9 @@ package com.ironcorerobotics.ControlClasses;
 public class TheAutonomousREXSuper
 
 {
-    boolean Opmodecondition;
-    TwoWheelDriveTrain drive;
+    private TwoWheelDriveTrain drive;
 
-    public TheAutonomousREXSuper(boolean opmodecondition, TwoWheelDriveTrain drive) {
-        Opmodecondition = opmodecondition;
+    public TheAutonomousREXSuper( TwoWheelDriveTrain drive) {
         this.drive = drive;
     }
 
