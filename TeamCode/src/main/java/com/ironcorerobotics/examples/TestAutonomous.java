@@ -38,7 +38,9 @@ public class TestAutonomous extends LinearOpMode {
         final Thread t1 = new Thread() {
             public void run() {
 
-                while (Chassis.isOpModeState() && opModeIsActive()) {
+                while (Chassis.isOpModeState() && opModeIsActive())
+
+                {
                     telemetry.addLine("I am running the robot");
                     telemetry.update();
                     Chassis.autoDrive(1000, "Right", .20);
