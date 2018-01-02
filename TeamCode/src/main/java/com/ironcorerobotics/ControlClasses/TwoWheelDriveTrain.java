@@ -73,14 +73,14 @@ public class TwoWheelDriveTrain
         return true;
     }
 
-    public void brake() throws InterruptedException
+    public void brake()
 
     {
-        motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        motor1.setPower(0);
-        motor2.setPower(0);
+            motor1.setTargetPosition(motor1.getCurrentPosition());
+            motor2.setTargetPosition(motor2.getCurrentPosition());
     }
 
 
