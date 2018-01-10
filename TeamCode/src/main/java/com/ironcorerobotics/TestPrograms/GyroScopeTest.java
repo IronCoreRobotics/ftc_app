@@ -50,31 +50,33 @@ public class GyroScopeTest extends LinearOpMode
 
         while(opModeIsActive())
         {
-            angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-            gravity  = imu.getGravity();
-            telemetry.addData("Value ",AngleUnit.DEGREES.normalize(angles.firstAngle));
-            telemetry.update();
-            DriveStraight();
+            DriveStraight(10);
         }
 
     }
 
-    public void DriveStraight()
+    public void DriveStraight(int correctionSensitivity)
     {
-        float startingOrientation = AngleUnit.DEGREES.normalize(angles.firstAngle);
+        double RightPower;
+        double LeftPower;
 
         while(opModeIsActive())
         {
             angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-            gravity  = imu.getGravity();
-            float currentOrientation = 0 - AngleUnit.DEGREES.normalize(angles.firstAngle);
-            telemetry.addData("We are off by ", currentOrientation);
+            double currentOrientation = 0 - AngleUnit.DEGREES.normalize(angles.firstAngle);
+            if(currentOrientation < 0)
+            {
+                LeftPower = 100 - (java.lang.Math.abs(currentOrientation) );
+                telemetry.addData("Turning right by slowing down left to ", LeftPower);
+            }
+            if(currentOrientation > 0)
+            {
+                RightPower = 100 - (java.lang.Math.abs(currentOrientation));
+                telemetry.addData("Turning left by slowing down right to ", RightPower);
+            }
+            telemetry.addData("Orientation = ", java.lang.Math.abs(currentOrientation));
             telemetry.update();
         }
-    }
-
-    String formatAngle(AngleUnit angleUnit, double angle) {
-        return formatDegrees(AngleUnit.DEGREES.fromUnit(angleUnit, angle));
     }
 
     String formatDegrees(double degrees){
