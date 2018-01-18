@@ -87,7 +87,7 @@ public class Vuforia_ReturnMethod extends LinearOpMode
         while (opModeIsActive() && RunVuforia) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
-            if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
+            if (vuMark != RelicRecoveryVuMark.UNKNOWN && time < 5) {
 
                 telemetry.addData("VuMark", "%s visible", vuMark);
 
@@ -127,6 +127,7 @@ public class Vuforia_ReturnMethod extends LinearOpMode
             } else {
                 telemetry.addData("VuMark", "not visible");
                 telemetry.update();
+                CryptoboxCipherColumnNumber = "Center";
             }
 
         }
