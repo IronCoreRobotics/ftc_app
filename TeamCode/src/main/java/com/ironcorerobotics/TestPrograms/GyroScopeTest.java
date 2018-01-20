@@ -3,6 +3,7 @@ package com.ironcorerobotics.TestPrograms;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -17,7 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
 @Autonomous(name = "Gyro Scope Test", group = "Test")
-//@Disabled
+@Disabled
 
 public class GyroScopeTest extends LinearOpMode
 

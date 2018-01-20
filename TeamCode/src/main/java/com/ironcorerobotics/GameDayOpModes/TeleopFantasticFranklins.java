@@ -164,9 +164,9 @@ public class TeleopFantasticFranklins extends OpMode {
 
         private void controlLift(Gamepad gamepad) {
             if (gamepad.b && !lift.isBusy()) {
-                lift.setTargetPosition(1380 + zeroPoint);
+                lift.setTargetPosition(1385 + zeroPoint);
             } else if (gamepad.y && !lift.isBusy()) {
-                lift.setTargetPosition(2575 + zeroPoint);
+                lift.setTargetPosition(2580 + zeroPoint);
             } else if (gamepad.a && !lift.isBusy()) {
                 lift.setTargetPosition(zeroPoint);
             }
