@@ -40,11 +40,6 @@ public class AutonomousQuadrant3Red extends LinearOpMode
     ColorSensor sensorColor;
     MotorControl controlMotor2 = new MotorControl(-1);
     String CryptoboxCipherColumnNumber;
-
-    public static final String TAG = "Vuforia VuMark Sample";
-
-    OpenGLMatrix lastLocation = null;
-
     VuforiaLocalizer vuforia;
 
     @Override public void runOpMode() throws InterruptedException
@@ -55,9 +50,13 @@ public class AutonomousQuadrant3Red extends LinearOpMode
         jewelSlapper = hardwareMap.servo.get("drawbridge_winch");
         sensorColor = (LynxI2cColorRangeSensor) hardwareMap.get("Color");
 
-        initVuforia();
+        initVurforia();
 
         waitForStart();
+
+        resetStartTime();
+
+        sleep(500);
 
         VuforiaReturnMethod();
 
@@ -74,7 +73,7 @@ public class AutonomousQuadrant3Red extends LinearOpMode
 
         lift.setTargetPosition(1350 + zeroPoint);
 
-        sleep(1000);
+        sleep(500);
 
         autoDrive(25, "Drive", .10);
 
@@ -82,7 +81,7 @@ public class AutonomousQuadrant3Red extends LinearOpMode
 
         sleep(500);
 
-        jewelSlapper.setPosition(0);
+        jewelSlapper.setPosition(0.36);
 
         sleep(500);
 
@@ -121,7 +120,7 @@ public class AutonomousQuadrant3Red extends LinearOpMode
             telemetry.addLine("Putting it in the left column");
             telemetry.update();
 
-            autoDrive(1730, "Reverse", .30);
+            autoDrive(1750, "Reverse", .30);
         } else {
             telemetry.addLine("Putting it in the center column");
             telemetry.update();
@@ -294,61 +293,6 @@ public class AutonomousQuadrant3Red extends LinearOpMode
         }
     }
 
-    public void autoCustomDrive(String direction, double speed)
-    {
-        motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        int startPosition = motor1.getCurrentPosition();
-
-        if(direction == "180")
-        {
-            while(startPosition - 3000 < motor1.getCurrentPosition() && opModeIsActive())
-            {
-                motor1.setPower(-speed);
-                motor2.setPower(speed*controlMotor2.getSpeed());
-            }
-        }
-
-        if(direction == "Right")
-        {
-            while(startPosition - 1500 < motor1.getCurrentPosition() && opModeIsActive())
-            {
-                motor1.setPower(-speed);
-                motor2.setPower(speed*controlMotor2.getSpeed());
-            }
-        }
-
-        if(direction == "Left")
-        {
-            while(startPosition + 1500 > motor1.getCurrentPosition() && opModeIsActive())
-            {
-                motor1.setPower(speed);
-                motor2.setPower(-speed*controlMotor2.getSpeed());
-            }
-        }
-
-        if(direction == "Reverse")
-        {
-            if(direction == "Reverse")
-            {
-                while(startPosition - 1000 < motor1.getCurrentPosition() && opModeIsActive())
-                {
-                    motor1.setPower(-speed);
-                    motor2.setPower(-speed*controlMotor2.getSpeed());
-                }
-            }
-        }
-
-        if(direction == "Drive")
-        {
-            while(startPosition + 1000 > motor1.getCurrentPosition() && opModeIsActive())
-            {
-                motor1.setPower(speed);
-                motor2.setPower(controlMotor2.getSpeed()*speed);
-            }
-        }
-    }
-
     public void brake()
 
     {
@@ -373,7 +317,7 @@ public class AutonomousQuadrant3Red extends LinearOpMode
         lift.setPower(0.50);
     }
 
-    private void initVuforia()
+    private void initVurforia()
     {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);

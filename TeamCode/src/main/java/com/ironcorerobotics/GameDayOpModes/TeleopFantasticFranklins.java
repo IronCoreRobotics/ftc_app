@@ -140,7 +140,6 @@ public class TeleopFantasticFranklins extends OpMode {
                 gripperPosition = 3;
             }
 
-
             if(gripperPosition == 2) {        //Slightly open
                 leftGrip.setPosition(0.45);
                 rightGrip.setPosition(0.8);
