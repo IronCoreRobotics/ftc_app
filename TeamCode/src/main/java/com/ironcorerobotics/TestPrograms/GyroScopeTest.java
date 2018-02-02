@@ -4,14 +4,12 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
-import java.util.Locale;
 
 /**
  * Created by Fam on 1/6/2018.
@@ -26,9 +24,8 @@ public class GyroScopeTest extends LinearOpMode
 {
     BNO055IMU imu;
     Orientation angles;
-    Acceleration gravity;
-    //DcMotor motor1;
-    //DcMotor motor2;
+    DcMotor motor1;
+    DcMotor motor2;
 
     public void runOpMode() throws InterruptedException {
 
@@ -43,8 +40,8 @@ public class GyroScopeTest extends LinearOpMode
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
 
-        //motor1 = hardwareMap.dcMotor.get("rightside_motor");
-        //motor2 = hardwareMap.dcMotor.get("leftside_motor");
+        motor1 = hardwareMap.dcMotor.get("rightside_Motor");
+        motor2 = hardwareMap.dcMotor.get("leftside_Motor");
 
         waitForStart();
 
@@ -66,21 +63,21 @@ public class GyroScopeTest extends LinearOpMode
             double currentOrientation = 0 - AngleUnit.DEGREES.normalize(angles.firstAngle);
             if(currentOrientation < 0)
             {
-                LeftPower = 100 - (java.lang.Math.abs(currentOrientation) );
+                LeftPower = -1.00 + (java.lang.Math.abs(currentOrientation) );
                 telemetry.addData("Turning right by slowing down left to ", LeftPower);
+                motor2.setPower(LeftPower);
+                motor1.setPower(1.00);
             }
             if(currentOrientation > 0)
             {
-                RightPower = 100 - (java.lang.Math.abs(currentOrientation));
+                RightPower = 1.00 - (java.lang.Math.abs(currentOrientation));
                 telemetry.addData("Turning left by slowing down right to ", RightPower);
+                motor1.setPower(RightPower);
+                motor2.setPower(-1.00);
             }
             telemetry.addData("Orientation = ", java.lang.Math.abs(currentOrientation));
             telemetry.update();
         }
-    }
-
-    String formatDegrees(double degrees){
-        return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
     }
 
 }

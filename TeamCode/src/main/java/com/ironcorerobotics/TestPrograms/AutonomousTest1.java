@@ -2,7 +2,6 @@ package com.ironcorerobotics.TestPrograms;
 
 import com.ironcorerobotics.ControlClasses.MotorControl;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -11,7 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  */
 
 @Autonomous(name = "Drive Testing", group = "Test")
-@Disabled
+//@Disabled
 
 public class AutonomousTest1 extends LinearOpMode
 
@@ -24,16 +23,14 @@ public class AutonomousTest1 extends LinearOpMode
     public void runOpMode() throws InterruptedException
 
     {
-        motor1 = hardwareMap.dcMotor.get("Test_Motor_2");
-        motor2 = hardwareMap.dcMotor.get("Test_Motor");
-
+        motor1 = hardwareMap.dcMotor.get("Test_Motor");
 
         waitForStart();
 
-        autoDrive(250, "Drive", .50);
-
-            brake();
-
+        while(motor1.getCurrentPosition() < 1000)
+        {
+            motor1.setPower(100);
+        }
     }
 
     public void autoDrive(int distance, String direction, double speed)
