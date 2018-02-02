@@ -87,11 +87,11 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         sleep(500);
 
-        jewelSlapper.setPosition(0.36);
+        jewelSlapper.setPosition(0.34);
 
         sleep(500);
 
-     JewelScoreAutonomous("Red", 280);
+     JewelScoreAutonomous("Red", 290);
 
         sleep(500);
 
