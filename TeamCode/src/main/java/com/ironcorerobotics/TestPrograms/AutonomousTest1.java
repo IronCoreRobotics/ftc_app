@@ -2,6 +2,7 @@ package com.ironcorerobotics.TestPrograms;
 
 import com.ironcorerobotics.ControlClasses.MotorControl;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -10,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  */
 
 @Autonomous(name = "Drive Testing", group = "Test")
-//@Disabled
+@Disabled
 
 public class AutonomousTest1 extends LinearOpMode
 

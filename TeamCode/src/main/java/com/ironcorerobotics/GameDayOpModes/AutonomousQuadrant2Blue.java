@@ -1,8 +1,10 @@
 package com.ironcorerobotics.GameDayOpModes;
 
 import com.ironcorerobotics.ControlClasses.MotorControl;
+import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -35,8 +37,7 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
     Servo rightGrip;
     Servo leftGrip;
     DcMotor lift;
-//    ColorSensor sensorColor;
-//    DistanceSensor sensorDistance;
+    ColorSensor sensorColor;
     MotorControl controlMotor2 = new MotorControl(-1);
     String CryptoboxCipherColumnNumber;
 
@@ -52,10 +53,17 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
         motor1 = hardwareMap.dcMotor.get("rightside_Motor");
         motor2 = hardwareMap.dcMotor.get("leftside_Motor");
         jewelSlapper = hardwareMap.servo.get("drawbridge_winch");
-//        sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
-//        sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_color_distance");
+        sensorColor = (LynxI2cColorRangeSensor) hardwareMap.get("Color");
+
+        initVurforia();
 
         waitForStart();
+
+        resetStartTime();
+
+        sleep(500);
+
+        VuforiaReturnMethod();
 
         initGripper();
 
@@ -78,135 +86,180 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
 
         sleep(500);
 
-        jewelSlapper.setPosition(0);
+        jewelSlapper.setPosition(0.36);
 
-        sleep(2000);
+        sleep(500);
 
-//        JewelScoreAutonomous("Blue", 240);
+        JewelScoreAutonomous("Blue", 280);
 
-        sleep(4000);
+        sleep(500);
 
-        autoDrive(30, "Left", .10);
+        autoDrive(120, "Left", .20);
 
         brake();
 
         //choose line up to correct cryptobox
 
-        autoDrive(650, "Drive", .20);
+        if(CryptoboxCipherColumnNumber == "Center") {
 
-        autoDrive(2100, "Drive", .30);
+            telemetry.addLine("Putting it in the center column");
+            telemetry.update();
 
-        brake();
+            autoDrive(2770, "Drive", .30);
+
+            autoDrive(15,"left", .30);
+
+            brake();
+        } else if (CryptoboxCipherColumnNumber == "Right")
+        {
+            telemetry.addLine("Putting it in the right column");
+            telemetry.update();
+
+            autoDrive(3195, "Drive", .30);
+
+            autoDrive(32, "Left", .30);
+
+            brake();
+        } else if (CryptoboxCipherColumnNumber == "Left")
+        {
+            telemetry.addLine("Putting it in the left column");
+            telemetry.update();
+
+            autoDrive(1950, "Drive", .30);
+
+            autoDrive(14,"left", .30);
+        } else {
+            telemetry.addLine("Putting it in the center column");
+            telemetry.update();
+
+            autoDrive(2770, "Drive", .30);
+
+            autoDrive(15,"left", .30);
+
+            brake();
+        }
 
         //square up to column
 
-        autoDrive(1230, "Left", .30);
+        autoDrive(1260, "Left", .30);
 
         brake();
 
-//        lift.setTargetPosition(50+zeroPoint);
-//
-//        sleep(1000);
-//
-//        autoDrive(500, "Drive", .30);
-//
-//        brake();
-//
-//        //special assurance
-//
-//        leftGrip.setPosition(0.45);
-//        rightGrip.setPosition(0.8);
-//
-//        sleep(500);
-//
-//        autoDrive(750, "Reverse", .30);
-//
-//        brake();
-//
-//        leftGrip.setPosition(0.30);
-//        rightGrip.setPosition(.95);
-//
-//        sleep(1000);
-//
-//        autoDrive(400, "Drive", .10);
-//
-//        autoDrive(150, "Drive", .75);
-//
-//        brake();
-//
-//        autoDrive(300, "Reverse", .30);
+        lift.setTargetPosition(50+zeroPoint);
+
+        sleep(1000);
+
+        autoDrive(520, "Drive", .30);
+
+        brake();
+
+        //special assurance
+
+        leftGrip.setPosition(0.45);
+        rightGrip.setPosition(0.8);
+
+        sleep(500);
+
+        autoDrive(750, "Reverse", .30);
+
+        brake();
+
+        leftGrip.setPosition(0.30);
+        rightGrip.setPosition(.95);
+
+        sleep(1000);
+
+        autoDrive(400, "Drive", .10);
+
+        autoDrive(160, "Drive", .75);
+
+        brake();
+
+        autoDrive(600, "Reverse", .30);
 
         brake();
 
         sleep(1000);
     }
 
-//    public void JewelScoreAutonomous(String AllianceColor, int knockOffDistance)
-//
-//    {
-//
-//        if (AllianceColor == "Blue")
-//
-//        {
-//
-//            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-//                autoDrive(knockOffDistance, "Reverse", .10);
-//
-//                brake();
-//
-//                jewelSlapper.setPosition(.9);
-//
-//                autoDrive(knockOffDistance-20, "Drive", .10);
-//
-//                brake();
-//            }
-//
-//            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-//                autoDrive(knockOffDistance, "Drive", .10);
-//
-//                brake();
-//
-//                jewelSlapper.setPosition(.9);
-//
-//                autoDrive(knockOffDistance+20, "Reverse", .10);
-//
-//                brake();
-//            }
-//        }
-//
-//        if (AllianceColor == "Red")
-//
-//        {
-//
-//            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
-//                autoDrive(knockOffDistance, "Drive", .10);
-//
-//                brake();
-//
-//                jewelSlapper.setPosition(.9);
-//
-//                autoDrive(knockOffDistance+20, "Reverse", .10);
-//
-//                brake();
-//            }
-//
-//            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
-//                autoDrive(knockOffDistance, "Reverse", .10);
-//
-//                brake();
-//
-//                jewelSlapper.setPosition(.9);
-//
-//                autoDrive(knockOffDistance-20, "Drive", .10);
-//
-//                brake();
-//            }
-//        }
-//
-//        brake();
-//
-//        sleep(1000);
-//    }
+    public void JewelScoreAutonomous(String AllianceColor, int knockOffDistance)
+
+    {
+
+        if (AllianceColor == "Blue")
+
+        {
+
+            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
+                autoDrive(knockOffDistance, "Reverse", .10);
+
+                brake();
+
+                jewelSlapper.setPosition(.9);
+
+                autoDrive(knockOffDistance-25, "Drive", .10);
+
+                motor1.setPower(0);
+                motor2.setPower(0);
+
+                brake();
+            }
+
+            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
+                autoDrive(knockOffDistance, "Drive", .10);
+
+                brake();
+
+                jewelSlapper.setPosition(.9);
+
+                autoDrive(knockOffDistance+25, "Reverse", .10);
+
+                motor1.setPower(0);
+                motor2.setPower(0);
+
+                brake();
+            }
+        }
+
+        if (AllianceColor == "Red")
+
+        {
+
+            if (sensorColor.red() < sensorColor.blue() && opModeIsActive()) {
+                autoDrive(knockOffDistance, "Drive", .10);
+
+                brake();
+
+                jewelSlapper.setPosition(.9);
+
+                autoDrive(knockOffDistance+25, "Reverse", .10);
+
+                motor1.setPower(0);
+                motor2.setPower(0);
+
+                brake();
+            }
+
+            if (sensorColor.red() > sensorColor.blue() && opModeIsActive()) {
+                autoDrive(knockOffDistance, "Reverse", .10);
+
+                brake();
+
+                jewelSlapper.setPosition(.9);
+
+                autoDrive(knockOffDistance-25, "Drive", .10);
+
+                motor1.setPower(0);
+                motor2.setPower(0);
+
+                brake();
+            }
+        }
+
+        brake();
+
+        sleep(1000);
+    }
 
     public void autoDrive(int distance, String direction, double speed)
 
@@ -250,61 +303,6 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
         }
     }
 
-    public void autoCustomDrive(String direction, double speed)
-    {
-        motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        int startPosition = motor1.getCurrentPosition();
-
-        if(direction == "180")
-        {
-            while(startPosition - 3000 < motor1.getCurrentPosition() && opModeIsActive())
-            {
-                motor1.setPower(-speed);
-                motor2.setPower(speed*controlMotor2.getSpeed());
-            }
-        }
-
-        if(direction == "Right")
-        {
-            while(startPosition - 1500 < motor1.getCurrentPosition() && opModeIsActive())
-            {
-                motor1.setPower(-speed);
-                motor2.setPower(speed*controlMotor2.getSpeed());
-            }
-        }
-
-        if(direction == "Left")
-        {
-            while(startPosition + 1500 > motor1.getCurrentPosition() && opModeIsActive())
-            {
-                motor1.setPower(speed);
-                motor2.setPower(-speed*controlMotor2.getSpeed());
-            }
-        }
-
-        if(direction == "Reverse")
-        {
-            if(direction == "Reverse")
-            {
-                while(startPosition - 1000 < motor1.getCurrentPosition() && opModeIsActive())
-                {
-                    motor1.setPower(-speed);
-                    motor2.setPower(-speed*controlMotor2.getSpeed());
-                }
-            }
-        }
-
-        if(direction == "Drive")
-        {
-            while(startPosition + 1000 > motor1.getCurrentPosition() && opModeIsActive())
-            {
-                motor1.setPower(speed);
-                motor2.setPower(controlMotor2.getSpeed()*speed);
-            }
-        }
-    }
-
     public void brake()
 
     {
@@ -329,7 +327,7 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
         lift.setPower(0.50);
     }
 
-    void VuforiaReturnMethod()
+    private void initVurforia()
     {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -338,23 +336,21 @@ public class AutonomousQuadrant2Blue extends LinearOpMode
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
         parameters.cameraMonitorFeedback = VuforiaLocalizer.Parameters.CameraMonitorFeedback.AXES;
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
+    }
 
+    private void VuforiaReturnMethod()
+    {
         VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
 
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
-        telemetry.addData(">", "Press Play to start");
-        telemetry.update();
-
         relicTrackables.activate();
-
         boolean RunVuforia = true;
-
-        while (opModeIsActive() && RunVuforia) {
+        while (opModeIsActive() && RunVuforia && time < 7) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
-            if (vuMark != RelicRecoveryVuMark.UNKNOWN && time < 5) {
+            if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
                 telemetry.addData("VuMark", "%s visible", vuMark);
 

@@ -2,6 +2,7 @@ package com.ironcorerobotics.examples;
 
 import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
@@ -9,7 +10,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
  * Created by shawneverly on 8/19/17.
  */
 @Autonomous(name = "Test Refactor")
-//@Disabled
+@Disabled
 public class TestAutonomous extends LinearOpMode {
 
 //    private DcMotor motor1;
