@@ -40,12 +40,10 @@ public class AutonomousQuadrant4Blue extends LinearOpMode
     ColorSensor sensorColor;
     MotorControl controlMotor2 = new MotorControl(-1);
     String CryptoboxCipherColumnNumber;
-
     public static final String TAG = "Vuforia VuMark Sample";
-
     OpenGLMatrix lastLocation = null;
-
     VuforiaLocalizer vuforia;
+    
     @Override
     public void runOpMode() throws InterruptedException
 
