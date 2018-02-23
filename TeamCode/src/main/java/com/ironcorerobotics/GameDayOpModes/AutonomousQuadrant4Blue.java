@@ -37,6 +37,7 @@ public class AutonomousQuadrant4Blue extends LinearOpMode
     Servo rightGrip;
     Servo leftGrip;
     DcMotor lift;
+
     ColorSensor sensorColor;
     MotorControl controlMotor2 = new MotorControl(-1);
     String CryptoboxCipherColumnNumber;
