@@ -10,18 +10,15 @@ public class MotorControl
     private double Speed;
     private boolean FirstButton;
     private boolean SecondButton;
+    private boolean ThirdButton;
     private double ControlledSpeed;
     private int FirstDivisionOfSpeed;
     private int SecondDivisionOfSpeed;
 
-
-
-    public MotorControl(double Speed, boolean FirstButton, boolean SecondButton, int FirstDivisionOfSpeed, int SecondDivisionOfSpeed)
+    public MotorControl(double Speed, int FirstDivisionOfSpeed, int SecondDivisionOfSpeed)
 
     {
         this.Speed = Speed;
-        this.SecondButton = SecondButton;
-        this.FirstButton = FirstButton;
         this.FirstDivisionOfSpeed = FirstDivisionOfSpeed;
         this.SecondDivisionOfSpeed = SecondDivisionOfSpeed;
     }
@@ -32,6 +29,22 @@ public class MotorControl
         Speed = speed;
     }
 
+    private void setControlledSpeed(double ControlledSpeed) {
+        this.ControlledSpeed = ControlledSpeed;
+    }
+
+    public void setFirstButton(boolean firstButton) {
+        FirstButton = firstButton;
+    }
+
+    public void setSecondButton(boolean secondButton) {
+        SecondButton = secondButton;
+    }
+
+    public void setThirdButton(boolean thirdButton) {
+        ThirdButton = thirdButton;
+    }
+
     public double getControlledSpeed()
 
     {
@@ -40,12 +53,6 @@ public class MotorControl
 
     public double getSpeed() {
         return Speed;
-    }
-
-    private void setControlledSpeed(double ControlledSpeed)
-
-    {
-        this.ControlledSpeed = ControlledSpeed;
     }
 
     private int getFirstDivisionOfSpeed()
@@ -62,22 +69,22 @@ public class MotorControl
 
     private double ControlMotorSpeed()
     {
-        if(this.FirstButton == false && this.SecondButton == false)
+        if(this.FirstButton == true)
 
         {
-            setControlledSpeed(this.Speed/getSecondDivisionOfSpeed());
-        }
+            setControlledSpeed(this.Speed);
 
-        if(this.FirstButton == true && this.SecondButton == false)
+        }
+        if(this.SecondButton == true)
 
         {
             setControlledSpeed(this.Speed/getFirstDivisionOfSpeed());
         }
 
-        if(this.FirstButton == true && this.SecondButton == true)
+        if(this.ThirdButton == true)
 
         {
-            setControlledSpeed(this.Speed);
+            setControlledSpeed(this.Speed/getSecondDivisionOfSpeed());
         }
 
         return this.ControlledSpeed;

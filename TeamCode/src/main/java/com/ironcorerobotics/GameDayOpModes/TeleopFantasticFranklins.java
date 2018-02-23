@@ -23,6 +23,9 @@ public class TeleopFantasticFranklins extends OpMode {
 
         boolean wasPressed;
 
+    MotorControl ControlMotor1 = new MotorControl(-1.00, 2, 5);
+    MotorControl ControlMotor2 = new MotorControl(1.00, 2, 5);
+
 
         Servo rightGrip;
         Servo leftGrip;
@@ -53,66 +56,63 @@ public class TeleopFantasticFranklins extends OpMode {
             controlGrip(gamepad2);
         }
 
-        public void drive()
-        {
-            MotorControl ControlMotor1 = new MotorControl(-1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 5);
-            MotorControl ControlMotor2 = new MotorControl(1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 5);
+        public void drive() {
 
-            if(gamepad1.left_stick_x == 1)
-
-            {
+            if(gamepad1.y) {
+                ControlMotor1.setThirdButton(true);
+                ControlMotor2.setThirdButton(true);
+                ControlMotor1.setSecondButton(false);
+                ControlMotor2.setSecondButton(false);
+                ControlMotor1.setFirstButton(false);
+                ControlMotor2.setFirstButton(false);
+            } else if(gamepad1.right_bumper) {
+                ControlMotor1.setThirdButton(false);
+                ControlMotor2.setThirdButton(false);
+                ControlMotor1.setSecondButton(true);
+                ControlMotor2.setSecondButton(true);
+                ControlMotor1.setFirstButton(false);
+                ControlMotor2.setFirstButton(false);
+            }else if (gamepad1.left_bumper) {
+                ControlMotor1.setThirdButton(false);
+                ControlMotor2.setThirdButton(false);
+                ControlMotor1.setSecondButton(false);
+                ControlMotor2.setSecondButton(false);
+                ControlMotor1.setFirstButton(true);
+                ControlMotor2.setFirstButton(true);
+            }
+            if (gamepad1.left_stick_x == 1) {
                 motor1.setPower(ControlMotor1.getControlledSpeed());
                 motor2.setPower(-ControlMotor2.getControlledSpeed());
-            }
-
-
-            else if(gamepad1.left_stick_x == -1)
-
-            {
+            } else if (gamepad1.left_stick_x == -1) {
                 motor1.setPower(-ControlMotor1.getControlledSpeed());
                 motor2.setPower(ControlMotor2.getControlledSpeed());
             }
-
-            else if (gamepad1.right_stick_y == 1)
-
-            {
+            else if (gamepad1.right_stick_y == 1) {
                 motor1.setPower(ControlMotor1.getControlledSpeed());
                 motor2.setPower(ControlMotor2.getControlledSpeed());
-            }
-            else if (gamepad1.right_stick_y == -1)
-            {
+            } else if (gamepad1.right_stick_y == -1) {
                 motor1.setPower(-ControlMotor1.getControlledSpeed());
                 motor2.setPower(-ControlMotor2.getControlledSpeed());
-            }
-            else if (gamepad1.x == true)
+            } else if(gamepad1.left_trigger == 1.00 && gamepad1.right_trigger == 1.00)
             {
-                autoDrive(100, "Drive", 1.00);
-
-                autoDrive(500, "Left", 1.00);
-
-                brake();
-
-                autoDrive(500, "Right",1.00);
+                motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             }
-
-            else
-            {
+            else {
                 motor1.setPower(0);
                 motor2.setPower(0);
             }
         }
+
         private void initGLS() {
             rightGrip = hardwareMap.servo.get("right_grip");
             leftGrip = hardwareMap.servo.get("left_grip");
-
-//            rightGrip.setPosition(0.9);
-//            leftGrip.setPosition(0.4);
 
             lift = hardwareMap.dcMotor.get("LiftMotor");
 
             lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             zeroPoint = lift.getCurrentPosition();
-            lift.setPower(0.75);
+            lift.setPower(1.00);
         }
 
 
@@ -170,15 +170,6 @@ public class TeleopFantasticFranklins extends OpMode {
                 lift.setTargetPosition(zeroPoint);
             }
         }
-    public void brake()
-
-    {
-        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        motor1.setTargetPosition(motor1.getCurrentPosition());
-        motor2.setTargetPosition(motor2.getCurrentPosition());
-    }
 
     public void autoDrive(int distance, String direction, double speed)
 

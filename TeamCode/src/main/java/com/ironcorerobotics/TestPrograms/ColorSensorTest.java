@@ -1,6 +1,5 @@
 package com.ironcorerobotics.TestPrograms;
 
-import com.ironcorerobotics.ControlClasses.MotorControl;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -33,8 +32,8 @@ public class ColorSensorTest extends LinearOpMode{
 
         boolean run = true;
 
-        MotorControl ControlMotor1 = new MotorControl(-1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
-        MotorControl ControlMotor2 = new MotorControl(1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
+//        MotorControl ControlMotor1 = new MotorControl(-1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
+//        MotorControl ControlMotor2 = new MotorControl(1.00, gamepad1.left_bumper, gamepad1.right_bumper, 2, 10);
 
         while(sensorDistance.getDistance(DistanceUnit.INCH) > 0 && sensorDistance.getDistance(DistanceUnit.INCH) < 5)
         {

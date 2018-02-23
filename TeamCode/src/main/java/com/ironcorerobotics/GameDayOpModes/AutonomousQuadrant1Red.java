@@ -62,7 +62,7 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         resetStartTime();
 
-        sleep(500);
+        sleep(100);
 
         VuforiaReturnMethod();
 
@@ -73,7 +73,7 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         jewelSlapper.setPosition(.9);
 
-        sleep(1000);
+        sleep(250);
 
         initLifter();
 
@@ -85,15 +85,15 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         brake();
 
-        sleep(500);
+        sleep(250);
 
-        jewelSlapper.setPosition(0.36);
+        jewelSlapper.setPosition(0.34);
 
-        sleep(500);
+        sleep(250);
 
-     JewelScoreAutonomous("Red", 280);
+     JewelScoreAutonomous("Red", 290);
 
-        sleep(500);
+        sleep(250);
 
         //choose and line up to correct column
 
@@ -102,7 +102,7 @@ public class AutonomousQuadrant1Red extends LinearOpMode
             telemetry.addLine("Putting it in the center column");
             telemetry.update();
 
-            autoDrive(3000, "Reverse", .30);
+            autoDrive(2990, "Reverse", .30);
 
             brake();
         } else if (CryptoboxCipherColumnNumber == "Right")
@@ -123,7 +123,7 @@ public class AutonomousQuadrant1Red extends LinearOpMode
             telemetry.addLine("Putting it in the center column");
             telemetry.update();
 
-            autoDrive(3000, "Reverse", .30);
+            autoDrive(2990, "Reverse", .30);
 
             brake();
         }
@@ -144,27 +144,27 @@ public class AutonomousQuadrant1Red extends LinearOpMode
 
         //special assurance
 
-        leftGrip.setPosition(0.45);
-        rightGrip.setPosition(0.8);
+        leftGrip.setPosition(0.30);
+        rightGrip.setPosition(0.4);
 
-        sleep(500);
+        sleep(250);
 
         autoDrive(750, "Reverse", .30);
 
         brake();
 
-        leftGrip.setPosition(0.30);
-        rightGrip.setPosition(.95);
+        leftGrip.setPosition(0.05);
+        rightGrip.setPosition(.64);
 
-        sleep(500);
+        sleep(250);
 
-        autoDrive(400, "Drive", .10);
+        autoDrive(400, "Drive", .50);
 
         autoDrive(150, "Drive", .75);
 
         brake();
 
-        autoDrive(600, "Reverse", .30);
+        autoDrive(500, "Reverse", 1.00);
 
         brake();
 
@@ -303,8 +303,8 @@ public class AutonomousQuadrant1Red extends LinearOpMode
     }
 
     private void initGripper() {
-        rightGrip = hardwareMap.servo.get("right_grip");
-        leftGrip = hardwareMap.servo.get("left_grip");
+        rightGrip = hardwareMap.servo.get("Bottom_Servo_Right");
+        leftGrip = hardwareMap.servo.get("Bottom_Servo_Left");
     }
 
     private void initLifter()
