@@ -6,6 +6,7 @@ import com.ironcorerobotics.ControlClasses.TwoWheelDriveTrain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
@@ -18,6 +19,7 @@ public class TestAutonomous extends LinearOpMode {
     private DcMotor motor1;
     private DcMotor motor2;
     private TwoWheelDriveTrain Chassis;
+    private ColorSensor sensorColor;
 
     public void runOpMode() throws InterruptedException {
 
