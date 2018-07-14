@@ -1,16 +1,23 @@
 package com.ironcorerobotics.TestPrograms;
 
 import com.ironcorerobotics.ControlClasses.MotorControl;
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
 /**
  * Created by Fam on 6/7/2018.
  */
 
-@TeleOp(name = "SwerveDriveCodeTest")
+@TeleOp(name = "SwerveDriveCode")
 //@Disabled//Comment this out when you copy this into your code
 
 public class SwerveDriveExperiment extends OpMode {
@@ -27,6 +34,8 @@ public class SwerveDriveExperiment extends OpMode {
     MotorControl ControlMotor1 = new MotorControl(1.00, 2, 5);
     MotorControl ControlMotor2 = new MotorControl(-1.00, 2, 5);
     MotorControl ControlMotor3 = new MotorControl(1.00,2,5);
+    BNO055IMU imu;
+    Orientation angles;
 
 
         public void init()
@@ -40,6 +49,21 @@ public class SwerveDriveExperiment extends OpMode {
             motor1 = hardwareMap.dcMotor.get("drive_motor");
             motor2 = hardwareMap.dcMotor.get("motor2");
             motor3 = hardwareMap.dcMotor.get("motor3");
+            testServo.setDirection(Servo.Direction.REVERSE);
+            testServo2.setDirection(Servo.Direction.REVERSE);
+            motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+            parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+            parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+            parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+            parameters.loggingEnabled      = true;
+            parameters.loggingTag          = "IMU";
+            parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+            imu = hardwareMap.get(BNO055IMU.class, "imu");
+            imu.initialize(parameters);
 
         }
 
@@ -47,15 +71,13 @@ public class SwerveDriveExperiment extends OpMode {
 
         {
             //Put your main code here
-            testServo.setDirection(Servo.Direction.REVERSE);
-            testServo2.setDirection(Servo.Direction.REVERSE);
-            telemetry.addData("servo position", getCaculatedServoPosition(gamepad1.left_stick_x, gamepad1.left_stick_y));
             testServo.setPosition(getCaculatedServoPosition(gamepad1.left_stick_x, gamepad1.left_stick_y));
             testServo2.setPosition(getCaculatedServoPosition(gamepad1.left_stick_x, gamepad1.left_stick_y));
             testServo3.setPosition(getCaculatedServoPosition(gamepad1.left_stick_x, gamepad1.left_stick_y));
+            //telemetry.addData("servo position", getCaculatedServoPosition(gamepad1.left_stick_x, gamepad1.left_stick_y));
+            telemetry.addData("robot position", getUpdatedIMUHeading());
             telemetry.update();
-            controlMotor();
-
+            controlMotors();
         }
 
         public double getCaculatedServoPosition(double x, double y)
@@ -100,20 +122,15 @@ public class SwerveDriveExperiment extends OpMode {
             return returnthis;
         }
 
-        public void controlMotor()
+        public void controlMotors()
         {
             boolean motorRun = false;
-            if(gamepad1.a){
-                motorRun=true;
+            if(gamepad1.a) {
+                motorRun = true;
             }
-            if(gamepad1.b){
-                motorRun=false;
-            }
-            if(motorRun==true) {
-                motor1.setPower(ControlMotor1.getControlledSpeed());
+            if(motorRun==true) {motor1.setPower(ControlMotor1.getControlledSpeed());
                 motor2.setPower(ControlMotor2.getControlledSpeed());
-                motor3.setPower(ControlMotor3.getControlledSpeed());
-            }
+                motor3.setPower(ControlMotor3.getControlledSpeed());}
             if(motorRun==false) {
                 motor1.setPower(0);
                 motor2.setPower(0);
@@ -149,14 +166,14 @@ public class SwerveDriveExperiment extends OpMode {
             ControlMotor1.setFirstButton(true);
             ControlMotor2.setFirstButton(true);
             ControlMotor3.setFirstButton(true);
-        }else if (gamepad1.right_stick_x > 0){//turning
+        }else if (gamepad1.right_stick_x < 0){//turning//left
             motor1.setPower(-ControlMotor1.getControlledSpeed());
             motor2.setPower(ControlMotor2.getControlledSpeed());
             motor3.setPower(-ControlMotor3.getControlledSpeed());
             testServo.setPosition(0);
             testServo2.setPosition(0);
             testServo3.setPosition(0);
-        }else if (gamepad1.right_stick_x < 0){
+        }else if (gamepad1.right_stick_x > 0){//right
             motor1.setPower(ControlMotor1.getControlledSpeed());
             motor2.setPower(-ControlMotor2.getControlledSpeed());
             motor3.setPower(ControlMotor3.getControlledSpeed());
@@ -164,7 +181,32 @@ public class SwerveDriveExperiment extends OpMode {
             testServo2.setPosition(0);
             testServo3.setPosition(0);
         }
+//        else if (gamepad1.b){
+//            boolean run = true;
+//            telemetry.addLine("I AM IN THE LOOP");
+//            while (run == true) {
+//                motor1.setPower(ControlMotor1.getControlledSpeed());
+//                motor2.setPower(-ControlMotor2.getControlledSpeed());
+//                motor3.setPower(ControlMotor3.getControlledSpeed());
+//                if(getUpdatedIMUHeading() == 90){
+//                    run = false;
+//                }
+//            }
+//        }
 
         }
+
+    public double getUpdatedIMUHeading(){
+        double convertedHeading = 0;
+        angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double currentOrientation = AngleUnit.DEGREES.normalize(angles.firstAngle);
+        telemetry.update();
+        if(currentOrientation > 0){
+            convertedHeading =  360 - currentOrientation;
+        }else if(currentOrientation < 0){
+            convertedHeading = Math.abs(currentOrientation);
+        }
+        return convertedHeading;
+    }
 
     }
