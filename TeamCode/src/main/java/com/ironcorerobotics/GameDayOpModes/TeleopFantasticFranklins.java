@@ -63,22 +63,22 @@ public class TeleopFantasticFranklins extends OpMode {
                 ControlMotor2.setThirdButton(true);
                 ControlMotor1.setSecondButton(false);
                 ControlMotor2.setSecondButton(false);
-                ControlMotor1.setFirstButton(false);
-                ControlMotor2.setFirstButton(false);
+//                ControlMotor1.setFirstButton(false);
+//                ControlMotor2.setFirstButton(false);
             } else if(gamepad1.right_bumper) {
                 ControlMotor1.setThirdButton(false);
                 ControlMotor2.setThirdButton(false);
                 ControlMotor1.setSecondButton(true);
                 ControlMotor2.setSecondButton(true);
-                ControlMotor1.setFirstButton(false);
-                ControlMotor2.setFirstButton(false);
+//                ControlMotor1.setFirstButton(false);
+//                ControlMotor2.setFirstButton(false);
             }else if (gamepad1.left_bumper) {
                 ControlMotor1.setThirdButton(false);
                 ControlMotor2.setThirdButton(false);
                 ControlMotor1.setSecondButton(false);
                 ControlMotor2.setSecondButton(false);
-                ControlMotor1.setFirstButton(true);
-                ControlMotor2.setFirstButton(true);
+//                ControlMotor1.setFirstButton(true);
+//                ControlMotor2.setFirstButton(true);
             }
             if (gamepad1.left_stick_x == 1) {
                 motor1.setPower(ControlMotor1.getControlledSpeed());
