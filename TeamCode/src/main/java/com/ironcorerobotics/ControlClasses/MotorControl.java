@@ -67,26 +67,47 @@ public class MotorControl
         return SecondDivisionOfSpeed;
     }
 
-    private double ControlMotorSpeed()
-    {
-        if(this.FirstButton == true)
+    private double ControlMotorSpeed() {
+        if (this.FirstButton == true)
 
         {
             setControlledSpeed(this.Speed);
 
         }
-        if(this.SecondButton == true)
+        if (this.SecondButton == true)
 
         {
-            setControlledSpeed(this.Speed/getFirstDivisionOfSpeed());
+            setControlledSpeed(this.Speed / getFirstDivisionOfSpeed());
         }
 
-        if(this.ThirdButton == true)
+        if (this.ThirdButton == true)
 
         {
-            setControlledSpeed(this.Speed/getSecondDivisionOfSpeed());
+            setControlledSpeed(this.Speed / getSecondDivisionOfSpeed());
         }
 
         return this.ControlledSpeed;
+    }
+
+    public void updateMotorControl(boolean ThirdButton, boolean SecondButton, double FirstButton) {
+        if (ThirdButton) {
+            this.ThirdButton = true;
+            this.SecondButton = false;
+            this.FirstButton = false;
+        } else if (SecondButton) {
+            this.ThirdButton = false;
+            this.SecondButton = true;
+            this.FirstButton = false;
+        } else if (FirstButton > 0) { //first button is a trigger which is a double{
+             this.ThirdButton = false;
+             this.SecondButton = false;
+             this.FirstButton = true;
+        }
+    }
+
+    public void initMotorControl(){
+        this.setThirdButton(true);
+        this.setSecondButton(false);
+        this.setFirstButton(false);
     }
 }
