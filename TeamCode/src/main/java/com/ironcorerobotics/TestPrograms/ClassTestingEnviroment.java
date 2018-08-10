@@ -1,5 +1,4 @@
 package com.ironcorerobotics.TestPrograms;
-
 import com.ironcorerobotics.ControlClasses.MotorControl;
 import com.ironcorerobotics.ControlClasses.SwerveDriveTrain;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -8,16 +7,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
 /**
  * Created by Fam on 6/7/2018.
  */
-
 @TeleOp(name = "SwerveDriveClassCode")
 //@Disabled//Comment this out when you copy this into your code
 
