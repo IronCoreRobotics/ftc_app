@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 /**
  * Created by Fam on 6/7/2018.
  */
-@TeleOp(name = "SwerveDriveClassCode")
+@TeleOp(name = "SwerveDriveNewClassCode")
 //@Disabled//Comment this out when you copy this into your code
 
 public class ClassTestingEnviroment extends OpMode {
@@ -35,6 +35,7 @@ public class ClassTestingEnviroment extends OpMode {
     Orientation angles;
     boolean runGyroThread;
     SwerveDriveTrain COMET = new SwerveDriveTrain();
+
 
 
     public void init()
